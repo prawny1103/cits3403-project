@@ -1,0 +1,110 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(53, 53, 53);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(168, 83, 229);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header img {
+    height: 2rem;
+}
+
+header a {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0.6rem 1.2rem;
+    color: black;
+}
+
+header span {
+    margin: 0 0.5rem;
+}
+
+/* login page */
+
+#login-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-block{
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 50%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.wrapper {
+    height: 100%;
+    width: 70%;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 100px;
+}
+
+.wrapper h1 {
+    font-size: 3rem;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.form-group, .wrapper button, .sign-up-text{
+    margin: 0.7rem;
+}
+
+#username, #password {
+    font-size: 1rem;
+    padding: 0.3rem;
+}
+
+form button {
+    width: 75%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: rgb(143, 143, 209);
+    padding: 0.4rem 0;
+    border-radius: 0.2rem;
+    border: none;
+}
+
+
+

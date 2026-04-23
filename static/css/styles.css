@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: rgb(53, 53, 53);
+    font-family: 'Roboto', sans-serif;
 }
 
 header {
@@ -39,72 +39,212 @@ header span {
     margin: 0 0.5rem;
 }
 
-/* login page */
+/* login and signup page */
 
-#login-page {
+#login-page,
+#signup-page {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.login-block{
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 50%;
-    height: 70%;
+#signup-page {
+    background-color: rgb(28, 28, 28);
+}
+
+#login-page {
+    background-color: rgb(15, 69, 86);
+}
+
+/* shared block styles */
+
+.login-block,
+.signup-block {
+    width: 35%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 1rem;
+    border: 2px solid rgb(0, 0, 0);
 }
 
-.wrapper {
+.login-block {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.signup-block {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* shared wrapper styles */
+
+.login-wrapper,
+.signup-wrapper {
     height: 100%;
-    width: 70%;
-    margin: 2rem;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding-top: 100px;
 }
 
-.wrapper h1 {
-    font-size: 3rem;
+.login-wrapper {
+    padding-top: 5rem;
 }
 
-form {
+/* shared form styles */
+
+.login-wrapper form,
+.signup-block form {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form-group,
+.signup-form-group {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.form-group {
-    font-size: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-}
-
-.form-group, .wrapper button, .sign-up-text{
-    margin: 0.7rem;
-}
-
-#username, #password {
-    font-size: 1rem;
-    padding: 0.3rem;
-}
-
-form button {
-    width: 75%;
-    font-size: 1.2rem;
+.login-form-group label,
+.signup-form-group label {
     font-weight: bold;
-    background-color: rgb(143, 143, 209);
-    padding: 0.4rem 0;
-    border-radius: 0.2rem;
-    border: none;
+    margin-left: 0.3rem;
 }
 
+.login-form-group,
+#login-button,
+.login-bottom-text,
+.signup-form-group,
+#signup-button,
+.signup-already-got-account-text {
+    margin-top: 1rem;
+}
 
+/* login page */
 
+.login-block h1 {
+    font-size: 3rem;
+    background-color: #77c1f2;
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom: 2px solid black;
+}
+
+#login-username,
+#login-password,
+#signup-username,
+#signup-password,
+#signup-email {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+    margin: 0.3rem 0;
+    border-radius: 0.5rem;
+}
+
+#login-username,
+#login-password {
+    border: 2px solid #77c1f2;
+}
+
+#signup-username,
+#signup-password,
+#signup-email {
+    border: 2px solid rgba(255, 255, 255, 0);
+}
+
+#login-username:hover,
+#login-password:hover {
+    border-color: rgb(0, 0, 0);
+    transition: 0.2s;
+}
+
+#signup-username:hover,
+#signup-password:hover,
+#signup-email:hover {
+    border: 2px solid rgb(105, 105, 228);
+}
+
+#login-button,
+#signup-button {
+    width: 100%;
+    border: none;
+    border-radius: 0.3rem;
+    font-weight: bold;
+}
+
+#login-button {
+    font-size: 1.2rem;
+    margin-top: 4rem;
+    background-color: #77c1f2;
+    padding: 1.5rem 0;
+    width: 40%;
+    border-radius: 4rem;
+}
+
+#signup-button {
+    font-size: 1.1rem;
+    margin-top: 4rem;
+    background-color: rgb(65, 208, 82);
+    padding: 0.5rem 0;
+}
+
+#login-button:hover,
+#signup-button:hover {
+    background-color: black;
+    color: white;
+    transition: 0.2s;
+}
+
+.login-forgotPass {
+    width: 100%;
+    text-align: right;
+    text-decoration: underline;
+}
+
+.login-wrapper a,
+.signup-to-login-link,
+.signup-block form p a {
+    text-decoration: underline;
+    color: black;
+}
+
+.login-wrapper a:hover,
+.signup-to-login-link:hover,
+.signup-block form p a:hover {
+    color: red;
+    transition: 0.2s;
+}
+
+/* signup page */
+
+.signup-join-name {
+    margin-top: 2.5rem;
+    font-size: 1rem;
+}
+
+.signup-create-your-account-head {
+    font-size: 3rem;
+    font-weight: 400;
+    margin: 1.5rem 0 3rem 0;
+}
+
+.signup-block form p {
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+}
+
+.signup-form-group span {
+    color: red;
+}
+
+.signup-already-got-account-text {
+    font-size: 0.8rem;
+}

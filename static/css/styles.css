@@ -106,5 +106,22 @@ form button {
     border: none;
 }
 
+/* landing page */
 
+.bg-blue {
+    background-color: #77c1f2;
+}
 
+.btn-blue {
+    background-color: #77c1f2;
+    color: black;
+    font-size: 1.2rem;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.landing-text {
+    font-family: "Arial Rounded MT Bold", sans-serif;
+}

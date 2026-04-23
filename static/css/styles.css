@@ -125,3 +125,8 @@ form button {
 .landing-text {
     font-family: "Arial Rounded MT Bold", sans-serif;
 }
+
+#landing-page a {
+    text-decoration: none;
+    color: black;
+}

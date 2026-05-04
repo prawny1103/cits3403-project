@@ -302,4 +302,33 @@ header span {
     border: 2px solid #77c1f2;
     height: 80px;
     width: 250px;
+}   
+
+/* Question: multichoice type */
+#multichoice-question #question-text {
+    align-content: center;
+    text-align: center;
+    min-width: 700px;
+    min-height: 200px;
+    font-size: 30px;
+}
+
+#answer-multi {
+    display: grid;
+    justify-content: center;
+    padding-bottom: 80px;
+    gap: 210px;
+    row-gap: 50px;
+    /* create 2x2 grid with equal sizes */
+    grid-template-rows: repeat(2, 80px);
+    grid-template-columns: repeat(2, 250px);
+}
+
+#answer-multi button {
+    background-color: white;
+    color: black;
+    font-size: 1.2rem;
+    border: 2px solid #77c1f2;
+    height: 80px;
+    width: 250px;
 }

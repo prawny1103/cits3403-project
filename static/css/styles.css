@@ -247,6 +247,7 @@ header span {
 
 .signup-already-got-account-text {
     font-size: 0.8rem;
+}
 /* landing page */
 
 .bg-blue {
@@ -270,4 +271,64 @@ header span {
 #landing-page a {
     text-decoration: none;
     color: black;
+}
+
+/* Question: true or false type */
+#tf-question #question-text {
+    align-content: center;
+    text-align: center;
+    min-width: 700px;
+    min-height: 200px;
+    font-size: 30px;
+}
+
+#question-block {
+    border: 2px solid #77c1f2;
+    display: flex;
+}
+
+#answer-tf {
+    display: flex;
+    justify-content: center;
+    gap: 210px;
+    padding-top: 20px;
+    padding-bottom: 80px;
+}
+
+#answer-tf button {
+    background-color: white;
+    color: black;
+    font-size: 1.2rem;
+    border: 2px solid #77c1f2;
+    height: 80px;
+    width: 250px;
+}   
+
+/* Question: multichoice type */
+#multichoice-question #question-text {
+    align-content: center;
+    text-align: center;
+    min-width: 700px;
+    min-height: 200px;
+    font-size: 30px;
+}
+
+#answer-multi {
+    display: grid;
+    justify-content: center;
+    padding-bottom: 80px;
+    gap: 210px;
+    row-gap: 50px;
+    /* create 2x2 grid with equal sizes */
+    grid-template-rows: repeat(2, 80px);
+    grid-template-columns: repeat(2, 250px);
+}
+
+#answer-multi button {
+    background-color: white;
+    color: black;
+    font-size: 1.2rem;
+    border: 2px solid #77c1f2;
+    height: 80px;
+    width: 250px;
 }

@@ -35,7 +35,7 @@ class RoomPlayer(db.Model):
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    started_at = db.Column(db.DateTime)
+    started_at = db.Column(db.DateTime, default=datetime.utcnow)
     ended_at = db.Column(db.DateTime)
 
 # Stores each player's result for a game.

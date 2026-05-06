@@ -29,6 +29,7 @@ class RoomPlayer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    joined_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 # Represents one quiz game session.
 class Game(db.Model):

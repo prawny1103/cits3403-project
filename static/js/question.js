@@ -2,7 +2,7 @@ function setQuestion(text) {
     document.getElementById("question-text").innerHTML = text;
 }
 
-const optionsContainer = document.querySelector('.answer-multi');
+const optionsContainer = document.querySelector('#answer-multi');
 
 optionsContainer.addEventListener('click', async (event) => {
     // Was what was clicked a button?
@@ -22,6 +22,14 @@ optionsContainer.addEventListener('click', async (event) => {
                 user_choice: choice
             })
         });
+
+        const data = await response.json();
+
+        if (data.is_correct) {
+            buttonClicked.classList.add('btn-correct')
+        } else {
+            buttonClicked.classList.add('btn-incorrect')
+        }
     } catch (err) {
         console.log("error contacting server");
     }

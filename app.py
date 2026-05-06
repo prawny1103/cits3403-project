@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -67,24 +67,26 @@ def friends():
 @app.route('/multichoice')
 def multichoice():
     question = "The sky is blue?"
-    return render_template('multichoice.html', question=question)
+    return render_template('multichoice.html', question=question, question_id=1)
 
-@app.route('/check-answer')
+@app.route('/check-answer', methods=['POST'])
 def check_answer():
     data = request.get_json()
-    q_id = data.get('question-id')
-    user_choice = data.get('user-choice')
+    q_id = data.get('question_id')
+    user_choice = data.get('user_choice')
 
     # Perform database lookup to see if the user choice is the correct choice for the question id
     # Perform logic based on whether correct or nots
 
     correct_answer = 'C' # pretend this was found from the database
     if user_choice == correct_answer:
-        # do something
-        pass
+        return jsonify({
+            "is_correct": True
+        })
     else:
-        # do something else
-        pass
+        return jsonify({
+            "is_correct": False
+        })
 
 if __name__ == "__main__":
     app.run(debug=True)

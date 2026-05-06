@@ -8,6 +8,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+# Stores user login information.
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
@@ -15,7 +16,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(200), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-
+# Stores quiz room information.
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_code = db.Column(db.String(10), unique=True, nullable=False)
@@ -23,20 +24,20 @@ class Room(db.Model):
     status = db.Column(db.String(20), default="waiting")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-
+# Links users to rooms.
 class RoomPlayer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-
+# Represents one quiz game session.
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     started_at = db.Column(db.DateTime)
     ended_at = db.Column(db.DateTime)
 
-
+# Stores each player's result for a game.
 class PlayerStats(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     game_id = db.Column(db.Integer, db.ForeignKey('game.id'))

@@ -78,5 +78,13 @@ def check_answer():
     # Perform database lookup to see if the user choice is the correct choice for the question id
     # Perform logic based on whether correct or nots
 
+    correct_answer = 'C' # pretend this was found from the database
+    if user_choice == correct_answer:
+        # do something
+        pass
+    else:
+        # do something else
+        pass
+
 if __name__ == "__main__":
     app.run(debug=True)

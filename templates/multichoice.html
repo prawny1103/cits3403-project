@@ -19,15 +19,15 @@
 
                 <div class="d-flex justify-content-center align-items-center bg-white p-5">
                     <div id="question-block" class="rounded-5">
-                        <p id="question-text">Question</p>
+                        <p id="question-text" question-id="{{ question-id }}">{{ question }}</p>
                     </div>
                 </div>
 
                 <div id="answer-multi">
-                    <button class="rounded-pill">A</button>
-                    <button class="rounded-pill">B</button>
-                    <button class="rounded-pill">C</button>
-                    <button class="rounded-pill">D</button>
+                    <button class="choice-btn rounded-pill" ans-choice="A">A</button>
+                    <button class="choice-btn rounded-pill" ans-choice="B">B</button>
+                    <button class="choice-btn rounded-pill" ans-choice="C">C</button>
+                    <button class="choice-btn rounded-pill" ans-choice="D">D</button>
                 </div>
 
             </div>

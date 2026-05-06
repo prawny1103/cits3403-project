@@ -64,5 +64,19 @@ def about():
 def friends():
     return render_template('friends.html')
 
+@app.route('/multichoice')
+def multichoice():
+    question = "The sky is blue?"
+    return render_template('multichoice.html', question=question)
+
+@app.route('/check-answer')
+def check_answer():
+    data = request.get_json()
+    q_id = data.get('question-id')
+    user_choice = data.get('user-choice')
+
+    # Perform database lookup to see if the user choice is the correct choice for the question id
+    # Perform logic based on whether correct or nots
+
 if __name__ == "__main__":
     app.run(debug=True)

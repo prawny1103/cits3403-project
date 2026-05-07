@@ -25,10 +25,9 @@
                 </div>
 
                 <div id="answer-multi">
-                    <button class="choice-btn rounded-pill" ans-choice="A">A</button>
-                    <button class="choice-btn rounded-pill" ans-choice="B">B</button>
-                    <button class="choice-btn rounded-pill" ans-choice="C">C</button>
-                    <button class="choice-btn rounded-pill" ans-choice="D">D</button>
+                    {% for key, value in choices.items() %}
+                    <button class="choice-btn rounded-pill" ans-choice="{{ key }}">{{ value }}</button>
+                    {% endfor %}
                 </div>
 
             </div>

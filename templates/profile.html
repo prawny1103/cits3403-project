@@ -8,49 +8,67 @@
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-    <main class="container mt-5">
-        <div class="card shadow-sm">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div>
-                    <h2>Profile</h2>
-                    <p class="mb-0">Welcome back, {{ user.username }}.</p>
-                </div>
-                <div class="d-flex gap-2">
-                    <a class="btn btn-primary" href="/">Back to Home</a>
-                    <a class="btn btn-outline-secondary" href="/logout">Sign Out</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <h4>Account details</h4>
-                <ul class="list-group mb-4">
-                    <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
-                    <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
-                    <li class="list-group-item"><strong>Member since:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</li>
-                </ul>
+    <main id="landing-page">
+        <div class="container mt-5">
+            <div class="border border-dark border-4 rounded-5 overflow-hidden shadow">
 
-                <h4>Saved stats</h4>
-                {% if stats %}
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Game ID</th>
-                            <th scope="col">Score</th>
-                            <th scope="col">Correct Answers</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for stat in stats %}
-                            <tr>
-                                <td>{{ stat.game_id }}</td>
-                                <td>{{ stat.score }}</td>
-                                <td>{{ stat.correct_answers }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                    <p class="text-muted">No quiz results saved yet. Complete a quiz to see your progress here.</p>
-                {% endif %}
+                <div class="bg-blue p-4 d-flex justify-content-between align-items-center border-bottom border-dark border-4 landing-text">
+                    <div>
+                        <h1>Agile Quiz</h1>
+                        <p class="mb-0">Profile page</p>
+                    </div>
+                    <div class="small-text">
+                        <h3><a href="/">Home</a></h3>
+                        <h3><a href="/logout">Sign Out</a></h3>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 text-center" style="min-height: 550px;">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-10">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-start">
+                                    <h2 class="card-title fw-bold">Welcome back, {{ user.username }}</h2>
+                                    <p class="text-muted">Your account information and quiz progress are shown below.</p>
+
+                                    <div class="card p-3 border border-dark rounded-4 mb-4">
+                                        <h5 class="fw-bold">Account details</h5>
+                                        <ul class="list-group list-group-flush mt-3">
+                                            <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+                                            <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                                            <li class="list-group-item"><strong>Member since:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</li>
+                                        </ul>
+                                    </div>
+
+                                    <h4 class="fw-bold">Saved stats</h4>
+                                    {% if stats %}
+                                        <table class="table table-striped mt-3">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Game ID</th>
+                                                    <th scope="col">Score</th>
+                                                    <th scope="col">Correct Answers</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for stat in stats %}
+                                                    <tr>
+                                                        <td>{{ stat.game_id }}</td>
+                                                        <td>{{ stat.score }}</td>
+                                                        <td>{{ stat.correct_answers }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    {% else %}
+                                        <p class="text-muted mt-3">No quiz results saved yet. Complete a quiz to see your progress here.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>

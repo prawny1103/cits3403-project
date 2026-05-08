@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Room</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <main id="multichoice-question">
+        <div class="container mt-5">
+            <div class="border border-dark border-4 rounded-5 overflow-hidden shadow">
+
+                <div class="bg-blue p-4 d-flex justify-content-between align-items-center border-bottom border-dark border-4 landing-text">
+                    <h1>Agile Quiz</h1>
+                    <div>
+                        {% if current_user %}
+                            <span class="me-3">Signed in as {{ current_user.username }}</span>
+                            <a class="btn btn-outline-light btn-sm" href="/profile">Profile</a>
+                            <a class="btn btn-outline-light btn-sm" href="/logout">Sign Out</a>
+                        {% else %}
+                            <a class="btn btn-outline-light btn-sm me-2" href="/login">Sign In</a>
+                            <a class="btn btn-outline-light btn-sm" href="/register">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 text-center" style="min-height: 550px;">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-8">
+                            <div class="card border-0">
+                                <div class="card-body text-center">
+                                    <h2 class="card-title fw-bold mb-4">Join a Room</h2>
+                                    <p class="text-muted mb-5">Enter the 4-digit room code to join a quiz.</p>
+
+                                    <form>
+                                        <div class="row g-4">
+                                            <div class="col-12">
+                                                <div class="card p-4 border-0 rounded-4">
+                                                    <h5 class="fw-bold mb-3">Room Code</h5>
+                                                    <input type="text" id="room-code" class="form-control rounded-pill px-4 py-3 border border-primary text-center" 
+                                                           placeholder="0000" maxlength="4" inputmode="numeric" 
+                                                           style="font-size: 1.5rem; letter-spacing: 0.3rem; font-weight: bold;">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 text-center mt-4">
+                                                <button type="button" class="btn btn-blue rounded-pill px-5 py-3 fw-bold border border-dark border-2">JOIN ROOM</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const roomCodeInput = document.getElementById('room-code');
+
+        // Only allow numeric input
+        roomCodeInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+
+        // Auto-focus on first character, format display
+        roomCodeInput.addEventListener('keypress', (e) => {
+            if (roomCodeInput.value.length >= 4) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

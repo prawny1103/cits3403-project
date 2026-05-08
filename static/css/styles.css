@@ -351,3 +351,17 @@ header span {
     background-color: #1f4a7d;
     color: white;
 }
+
+/* Login alert styles */
+#login-alert {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+        
+#login-alert.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}

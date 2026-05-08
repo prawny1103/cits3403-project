@@ -7,17 +7,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../static/css/styles.css">
     <style>
-        #login-alert {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-20px);
-            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
-        }
-        #login-alert.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
+       
     </style>
     </head>
 
@@ -56,7 +46,7 @@
                 
                 <div class="d-flex justify-content-center gap-5 mt-4">
                     <button id="create-room-button" type="button" class="btn btn-blue rounded-pill px-5 py-3 fw-bold border border-dark border-2">Create Room</button>
-                    <button class="btn btn-blue rounded-pill px-5 py-3 fw-bold border border-dark border-2">Join Room</button>
+                    <button id="join-room-button" type="button" class="btn btn-blue rounded-pill px-5 py-3 fw-bold border border-dark border-2">Join Room</button>
                 </div>
                 <div id="login-alert" class="alert alert-warning mt-4 mx-auto" role="alert" style="max-width: 400px;">
                     Please login to create a room
@@ -66,6 +56,7 @@
         </main>
     <script>
         const createRoomButton = document.getElementById('create-room-button');
+        const joinRoomButton = document.getElementById('join-room-button');
         const loginAlert = document.getElementById('login-alert');
         const isLoggedIn = {{ (current_user is not none) | tojson }};
         let alertTimeout;
@@ -95,7 +86,16 @@
                 window.location.href = '/create-room';
                 return;
             }
+            loginAlert.textContent = 'Please login to create a room';
+            showLoginAlert();
+        });
 
+        joinRoomButton.addEventListener('click', () => {
+            if (isLoggedIn) {
+                window.location.href = '/join-room';
+                return;
+            }
+            loginAlert.textContent = 'Please login to join a room';
             showLoginAlert();
         });
     </script>

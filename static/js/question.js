@@ -29,9 +29,10 @@ async function loadNextQuestion(currentId) {
             answerContainer.appendChild(button);
         }
         
-        // Reset button styles
+        // Reset button styles and enable
         document.querySelectorAll('.choice-btn').forEach(btn => {
             btn.classList.remove('btn-correct', 'btn-incorrect');
+            btn.disabled = false;
         });
     } catch (err) {
         console.log("Error loading next question:", err);
@@ -44,9 +45,15 @@ optionsContainer.addEventListener('click', async (event) => {
     // Was what was clicked a button?
     if (!event.target.classList.contains('choice-btn')) return;
 
+    // Prevent multiple selections
+    if (document.querySelector('.choice-btn:disabled')) return;
+
     const buttonClicked = event.target;
     const choice = buttonClicked.getAttribute('ans-choice');
     const questionId = document.getElementById('question-text').getAttribute('question-id');
+
+    // Disable all buttons
+    document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
 
     try {
         // POST the choice
@@ -74,5 +81,7 @@ optionsContainer.addEventListener('click', async (event) => {
 
     } catch (err) {
         console.log("error contacting server");
+        // Re-enable buttons on error
+        document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = false);
     }
 });

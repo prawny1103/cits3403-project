@@ -195,6 +195,14 @@ def profile():
 def about():
     return render_template('contactUs.html')
 
+@app.route('/create-room')
+def create_room():
+    return render_template('createRoom.html')
+
+@app.route('/join-room')
+def join_room():
+    return render_template('joinRoom.html')
+
 @app.route('/friends')
 def friends():
     return render_template('friends.html')

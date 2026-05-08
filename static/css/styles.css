@@ -332,3 +332,11 @@ header span {
     height: 80px;
     width: 250px;
 }
+
+.btn-correct {
+    background-color: green !important;
+}
+
+.btn-incorrect {
+    background-color: red !important;
+}

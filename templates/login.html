@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,15 +16,23 @@
             <h1>Sign In</h1>
             <div class="login-wrapper">
 
-                <form>
+                <form method="post" action="/login">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="alert alert-warning" role="alert">
+                                {{ messages[0] }}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+
                     <div class="login-form-group">
                         <label for="login-username">Username or Email </label>
-                        <input type="text" id="login-username" name="login-username" required placeholder="Enter your username">
+                        <input type="text" id="login-username" name="login" required placeholder="Enter your username or email">
                     </div>
                     
                     <div class="login-form-group">
                         <label for="login-password">Password</label>
-                        <input type="password" id="login-password" name="login-password" required placeholder="Enter your password">
+                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
                     </div>
                     
                     <a class="login-forgotPass" href="">Forgot Password</a>
@@ -33,7 +42,7 @@
                 
                 <p class="login-bottom-text">
                     Don't have an account?
-                    <a href="signup.html">Sign up here</a>
+                    <a href="/register">Sign up here</a>
                 </p>
                 
             </div>

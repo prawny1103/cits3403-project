@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import json
 
 app = Flask(__name__)
+app.secret_key = 'replace-this-with-a-secure-secret' # Do later, for now just a placeholder but when we change it we have to use the secret key in Github
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -56,17 +58,88 @@ class Question(db.Model):
     choices = db.Column(db.Text, nullable=True)  # JSON string of choices: {"A": "Paris", "B": "London", "C": "Berlin", "D": "Madrid"}
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+@app.context_processor
+def inject_current_user():
+    user_id = session.get('user_id')
+    if user_id:
+        user = db.session.get(User, user_id)
+    else:
+        user = None
+    return {'current_user': user}
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def signup():
+    if session.get('user_id'):
+        return redirect(url_for('profile'))
+
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        email = request.form.get('email', '').strip().lower()
+        password = request.form.get('password', '')
+
+        if not username or not email or not password:
+            flash('Please complete all required fields.')
+            return redirect(url_for('signup'))
+
+        if User.query.filter_by(username=username).first():
+            flash('That username is already taken. Please choose another.')
+            return redirect(url_for('signup'))
+
+        if User.query.filter_by(email=email).first():
+            flash('That email is already registered. Please log in.')
+            return redirect(url_for('login'))
+
+        password_hash = generate_password_hash(password)
+        user = User(username=username, email=email, password_hash=password_hash)
+        db.session.add(user)
+        db.session.commit()
+
+        session['user_id'] = user.id
+        flash('Account created successfully. You are now logged in.')
+        return redirect(url_for('profile'))
+
     return render_template('signup.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if session.get('user_id'):
+        return redirect(url_for('profile'))
+
+    if request.method == 'POST':
+        login_value = request.form.get('login', '').strip()
+        password = request.form.get('password', '')
+
+        user = User.query.filter((User.username == login_value) | (User.email == login_value)).first()
+        if user and check_password_hash(user.password_hash, password):
+            session['user_id'] = user.id
+            flash('Signed in successfully.')
+            return redirect(url_for('profile'))
+
+        flash('Invalid username/email or password.')
+        return redirect(url_for('login'))
+
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('You have been signed out.')
+    return redirect(url_for('home'))
+
+@app.route('/profile')
+def profile():
+    user_id = session.get('user_id')
+    if not user_id:
+        flash('Please sign in to view your profile.')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, user_id)
+    stats = PlayerStats.query.filter_by(user_id=user_id).all()
+    return render_template('profile.html', user=user, stats=stats)
 
 @app.route('/about')
 def about():

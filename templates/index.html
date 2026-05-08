@@ -17,8 +17,14 @@
                 <div class="bg-blue p-4 d-flex justify-content-between align-items-center border-bottom border-dark border-4 landing-text">
                     <h1>Agile Quiz</h1>
                     <div class="small-text">
-                        <h3><a href="login">Sign In</a></h3>
-                        <h3><a href="signup">Register</a></h3>
+                        {% if current_user %}
+                            <h3>Welcome, {{ current_user.username }}</h3>
+                            <h3><a href="/profile">Profile</a></h3>
+                            <h3><a href="/logout">Sign Out</a></h3>
+                        {% else %}
+                            <h3><a href="/login">Sign In</a></h3>
+                            <h3><a href="/register">Register</a></h3>
+                        {% endif %}
                     </div>
                     
                 </div>

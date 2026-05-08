@@ -92,13 +92,13 @@
                                                     <h5 class="fw-bold mb-3">Timer</h5>
                                                     <div class="row gy-3">
                                                         <div class="col-4">
-                                                            <button type="button" class="btn btn-blue rounded-pill w-100 px-4 py-3 border border-dark border-2">15 sec</button>
+                                                            <button type="button" class="timer-btn btn rounded-pill w-100 px-4 py-3 border border-dark border-2" data-timer="15">15 sec</button>
                                                         </div>
                                                         <div class="col-4">
-                                                            <button type="button" class="btn btn-blue rounded-pill w-100 px-4 py-3 border border-dark border-2">30 sec</button>
+                                                            <button type="button" class="timer-btn btn rounded-pill w-100 px-4 py-3 border border-dark border-2" data-timer="30">30 sec</button>
                                                         </div>
                                                         <div class="col-4">
-                                                            <button type="button" class="btn btn-blue rounded-pill w-100 px-4 py-3 border border-dark border-2">45 sec</button>
+                                                            <button type="button" class="timer-btn btn rounded-pill w-100 px-4 py-3 border border-dark border-2" data-timer="45">45 sec</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,12 +122,21 @@
         const presetRadio = document.getElementById('presetQuiz');
         const presetOptions = document.getElementById('preset-options');
         const randomSettings = document.getElementById('random-settings');
+        const timerButtons = document.querySelectorAll('.timer-btn');
 
         function updatePresetVisibility() {
             const isPreset = presetRadio.checked;
             presetOptions.style.display = isPreset ? 'block' : 'none';
             randomSettings.style.display = isPreset ? 'none' : 'flex';
         }
+
+        timerButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                timerButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+            });
+        });
 
         randomRadio.addEventListener('change', updatePresetVisibility);
         presetRadio.addEventListener('change', updatePresetVisibility);

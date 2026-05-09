@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from app.extensions import db, login_manager
 from app.models import db, Question
@@ -7,6 +8,11 @@ import json
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
 
     db.init_app(app)
     login_manager.init_app(app)

@@ -1,14 +1,13 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from app.extensions import db, login_manager
 from config import Config
-
-db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
     db.init_app(app)
+    login_manager.init_app(app)
 
     # Register Blueprints
     from app.routes.main import main_bp

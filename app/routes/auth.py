@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, current_user
 from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -19,7 +19,7 @@ def signup():
         new_user = User(
             username=username,
             email=email,
-            password_hash=generate_password_hash(password, method='sha256')
+            password_hash=generate_password_hash(password)
         )
 
         from app.extensions import db
@@ -27,20 +27,24 @@ def signup():
         db.session.commit()
 
         login_user(new_user)
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.home'))
 
     return render_template('signup.html')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    # Temporary fix, ideally the login button will not be visible once signed in
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
+    
     if (request.method == 'POST'):
-        email = request.form.get('email')
+        userID = request.form.get('userID')
         password = request.form.get('password')
         
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter((User.email == userID) | (User.username == userID)).first()
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.home'))
         
         flash('Invalid credentials')
     return render_template('login.html')
@@ -48,4 +52,4 @@ def login():
 @auth_bp.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.home'))

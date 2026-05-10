@@ -16,7 +16,7 @@
             <h1>Sign In</h1>
             <div class="login-wrapper">
 
-                <form>
+                <form method="POST" action="{{url_for('auth.signup')}}">
                     <div class="login-form-group">
                         <label for="login-username">Username or Email </label>
                         <input type="text" id="login-username" class="form-control" name="login-username" required placeholder="Enter your username">
@@ -34,7 +34,7 @@
                 
                 <p class="login-bottom-text">
                     Don't have an account?
-                    <a href="signup.html">Sign up here</a>
+                    <a href="{{ url_for('auth.signup') }}">Sign up here</a>
                 </p>
                 
             </div>

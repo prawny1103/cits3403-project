@@ -17,7 +17,7 @@
             <p class="signup-join-name">Join agileGroup</p>
             <p class="signup-create-your-account-head">Create your account</p>
 
-                <form>
+                <form method="POST" action="{{url_for('auth.signup')}}">
                     <div class="signup-form-group">
                         <label for="signup-username">Username <span>*</span></label>
                         <input type="text" id="signup-username"  class="form-control" name="signup-username" required placeholder="JohnDoe123">
@@ -30,7 +30,7 @@
 
                     <div class="signup-form-group">
                         <label for="signup-password">Password <span>*</span></label>
-                        <input type="password" id="signup-password" name="signup-password" required placeholder="agileGames213">
+                        <input type="password" id="signup-password" name="password" required placeholder="agileGames213">
                     </div>
 
                     <p>Make sure it's at least 5 characters OR at least 3 characters including a number and a lowecase letter. <a href="">Learn More</a></p>

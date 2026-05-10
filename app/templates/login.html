@@ -15,7 +15,7 @@
             <h1>Sign In</h1>
             <div class="login-wrapper">
 
-                <form method="POST" action="{{url_for('auth.signup')}}">
+                <form method="POST" action="{{ url_for('auth.login') }}">
                     <div class="login-form-group">
                         <label for="login-username">Username or Email </label>
                         <input type="text" id="login-username" name="userID" required placeholder="Enter your username">
@@ -30,6 +30,14 @@
 
                     <button id="login-button" type="submit">Login</button>
                 </form>
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-danger mt-3" role="alert">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 
                 <p class="login-bottom-text">
                     Don't have an account?

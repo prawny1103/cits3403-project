@@ -341,6 +341,18 @@ header span {
     background-color: red !important;
 }
 
+/* Timer button styles */
+.timer-btn {
+    background-color: #77c1f2;
+    color: black;
+}
+
+.timer-btn.selected {
+    background-color: #1f4a7d;
+    color: white;
+}
+
+
 /* Login alert styles */
 #login-alert {
     opacity: 0;

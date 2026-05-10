@@ -44,9 +44,6 @@ header span {
 #login-page,
 #signup-page {
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #signup-page {
@@ -191,7 +188,7 @@ header span {
 
 #signup-button {
     font-size: 1.1rem;
-    margin-top: 4rem;
+    margin-top: 2rem;
     background-color: rgb(65, 208, 82);
     padding: 0.5rem 0;
 }
@@ -233,7 +230,7 @@ header span {
 .signup-create-your-account-head {
     font-size: 3rem;
     font-weight: 400;
-    margin: 1.5rem 0 3rem 0;
+    margin: 1rem 0 1rem 0;
 }
 
 .signup-block form p {
@@ -247,6 +244,8 @@ header span {
 
 .signup-already-got-account-text {
     font-size: 0.8rem;
+}  
+
 /* landing page */
 
 .bg-blue {

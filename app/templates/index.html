@@ -72,13 +72,13 @@
                 } else if (isLoggedIn) {
                     if (createRoomBtn) {
                         createRoomBtn.addEventListener('click', function () {
-                            window.location.href = "/createRoom";
+                            window.location.href = "{{ url_for('main.create_room') }}";
                             return;
                         });
                     }
                     if (joinRoomBtn) {
                         joinRoomBtn.addEventListener('click', function () {
-                            window.location.href = "/joinRoom";
+                            window.location.href = "{{ url_for('main.join_room') }}";
                             return;
                         });
                     }

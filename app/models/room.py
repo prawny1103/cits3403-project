@@ -1,6 +1,5 @@
-from flask_socketio import SocketIO, emit, join_room
-from app.extensions import db
-from app.models import Room, RoomPlayer
+from app import socketio
+from flask_socketio import join_room, emit
 
 # When user joins a room
 @SocketIO.on('join_game')

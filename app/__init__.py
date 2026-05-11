@@ -1,9 +1,12 @@
 import os
 from flask import Flask
+from flask_socketio import SocketIO
 from app.extensions import db, login_manager
 from app.models import db, Question
 from config import Config
 import json
+
+socketio = SocketIO(cors_allowed_origins="*")
 
 def create_app():
     app = Flask(__name__)
@@ -16,6 +19,8 @@ def create_app():
 
     db.init_app(app)
     login_manager.init_app(app)
+
+    socketio.init_app(app)
 
     with app.app_context():
         db.create_all()

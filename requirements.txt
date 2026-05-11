@@ -2,6 +2,7 @@ Flask
 Flask-Login
 Flask-SQLAlchemy
 Flask-WTF
+Flask-socketio
 Werkzeug
 python-dotenv
 email-validator

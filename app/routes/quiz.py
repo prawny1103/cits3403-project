@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, url_for, redirect, flash
+from flask_login import login_required, current_user
 import json
 from app.extensions import db
-from app.models.quiz import Question
+from app.models.quiz import Question, Room
 
 quiz_bp = Blueprint('quiz', __name__)
 
@@ -44,3 +45,44 @@ def check_answer():
     return jsonify({
         "is_correct": is_correct
     })
+
+@quiz_bp.route('/create-game', methods=['GET', 'POST'])
+@login_required
+def create_game():
+    print("Button clicked, creating game...") # Debug log
+    code = Room.generate_code()
+    if not code:
+        return jsonify({"error": "Server is full, please try again later."}), 503
+    
+    new_room = Room(room_code=code, host_id=current_user.id)
+    db.session.add(new_room)
+    db.session.commit()
+    return redirect(url_for('quiz.game_room', room_code=code))
+
+@quiz_bp.route('/join-game', methods=['POST'])
+@login_required
+def join_game():
+    code = request.form.get('room_code')
+
+    room = Room.query.filter_by(room_code=code).first()
+    if not room:   
+        flash("Room not found. Please check the code and try again.")
+        return redirect(url_for('main.home'))
+    else:
+        return redirect(url_for('quiz.game_room', room_code=code))
+
+@quiz_bp.route('/game/<room_code>')
+@login_required
+def game_room(room_code):
+    room = Room.query.filter_by(room_code=room_code).first()
+    if not room:
+        flash("Room not found.")
+        return redirect(url_for('main.index'))
+    
+    is_host = (room.host_id == current_user.id)
+    
+    return render_template('game.html', room_code=room_code, is_host=is_host)
+
+@quiz_bp.route('/test')
+def test():
+    return "Test route is working!"

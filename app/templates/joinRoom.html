@@ -15,13 +15,15 @@
                 <div class="bg-blue p-4 d-flex justify-content-between align-items-center border-bottom border-dark border-4 landing-text">
                     <h1>Agile Quiz</h1>
                     <div>
-                        {% if current_user %}
+                        {% if current_user.is_authenticated %}
                             <span class="me-3">Signed in as {{ current_user.username }}</span>
+
+                            <!-- no '/profile in main.py' -->
                             <a class="btn btn-outline-light btn-sm" href="/profile">Profile</a>
-                            <a class="btn btn-outline-light btn-sm" href="/logout">Sign Out</a>
+                            <a class="btn btn-outline-light btn-sm" href="{{ url_for('auth.logout') }}">Sign Out</a>
                         {% else %}
-                            <a class="btn btn-outline-light btn-sm me-2" href="/login">Sign In</a>
-                            <a class="btn btn-outline-light btn-sm" href="/register">Register</a>
+                            <a class="btn btn-outline-light btn-sm me-2" href="{{url_for('auth.login') }}">Sign In</a>
+                            <a class="btn btn-outline-light btn-sm" href="{{url_for('auth.signup') }}">Register</a>
                         {% endif %}
                     </div>
                 </div>

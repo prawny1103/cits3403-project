@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-up Page</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -30,11 +30,19 @@
 
                     <div class="signup-form-group">
                         <label for="signup-password">Password <span>*</span></label>
-                        <input type="password" id="signup-password" name="password" required placeholder="agileGames213">
+                        <input type="password" class="form-control" id="signup-password" name="password" required placeholder="agileGames213">
                     </div>
 
-                    <p>Make sure it's at least 5 characters OR at least 3 characters including a number and a lowecase letter. <a href="">Learn More</a></p>
+                    <p>Make sure it's at least 5 characters OR at least 3 characters including a number and a lowecase letter. <a href="#">Learn More</a></p>
 
+                    <!-- Re-check this -->
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="alert alert-danger mt-3" role="alert">
+                                {{ messages[0] }}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
                     <button id="signup-button" class="btn" type="submit">Join Now</button>
                 </form>
                 

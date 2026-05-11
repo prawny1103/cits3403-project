@@ -1,13 +1,26 @@
 from datetime import datetime
 import json
+import random
+import string
 from app.extensions import db
 
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    room_code = db.Column(db.String(10), unique=True, nullable=False)
+    room_code = db.Column(db.String(4), unique=True, nullable=False)
+    is_active = db.Column(db.Boolean, default=True)
     host_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    status = db.Column(db.String(20), default="waiting")
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @staticmethod
+    def generate_code():
+        active_count = Room.query.count()
+        if active_count >= 10000:
+            return None # Server is full, all codes are in use
+        while True:
+            code = f"{random.randint(0, 9999):04d}"
+            if not Room.query.filter_by(room_code=code).first():
+                return code
+
+
 
 class RoomPlayer(db.Model):
     id = db.Column(db.Integer, primary_key=True)

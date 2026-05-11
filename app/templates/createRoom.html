@@ -34,7 +34,7 @@
                                     <h2 class="card-title fw-bold text-center mb-4">Host a Room</h2>
                                     <p class="text-muted text-center mb-5">Choose your quiz settings and invite players with a room code.</p>
 
-                                    <form>
+                                    <form action="{{ url_for('quiz.create_game') }}" method="POST">
                                         <div class="row g-4">
                                             <div class="col-12">
                                                 <div class="card p-4 border border-dark rounded-4">
@@ -105,7 +105,7 @@
                                             </div>
 
                                             <div class="col-12 text-center mt-4">
-                                                <button type="button" class="btn btn-blue rounded-pill px-5 py-3 fw-bold border border-dark border-2">HOST ROOM</button>
+                                                <button type="submit" class="btn-create btn-blue rounded-pill px-5 py-3 fw-bold border border-dark border-2">HOST ROOM</button>
                                             </div>
                                         </div>
                                     </form>

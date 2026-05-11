@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Agile Quiz</title>
+    </head>
+    <body>
+        <div class="lobby-container">
+            <h1>Room Code: <span id="display-code">{{ room_code }}</span></h1>
+
+            <h3>Players Joined:</h3>
+            <ul id="player-list">
+
+            </ul>
+
+            {% if is_host %}
+            <button id="start-game" onclick="startGame()">Start Game</button>
+            {% else %}
+            <p>Waiting for host to start the game...</p>
+            {% endif %}
+        </div>
+
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+        <script>
+            const socket = io();
+            const roomCode = "{{ room_code }}";
+
+            // Tell the server we have joined the room
+            socket.emit('join_room', { room_code: roomCode });
+
+            // Listen for updates to the player list
+            socket.on('update_players', function(data) {
+                console.log("Received player list update:", data); // Debug log
+                const playerList = document.getElementById('player-list');
+                playerList.innerHTML = '';
+                data.players.forEach(player => {
+                    const li = document.createElement('li');
+                    li.textContent = player;
+                    playerList.appendChild(li);
+                });
+            });
+
+            // Listen for the game start signal (redirects everyone to the quiz page)
+            socket.on('start_game', function() {
+                window.location.href = `/quiz/${roomCode}/start`;
+            });
+        </script>
+        <script>
+            function startGame() {
+                // Send signal to server to start the game
+                socket.emit('start_game', { room_code: "{{ room_code }}" });
+            }
+        </script>
+    </body>
+</html>

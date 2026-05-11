@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    <main id="login-page">
-        <section class="login-block">
+    <main id="login-page" class="d-flex align-items-center justify-content-center">
+        <section class="login-block shadow">
             <h1>Sign In</h1>
             <div class="login-wrapper">
 
                 <form method="POST" action="{{ url_for('auth.login') }}">
                     <div class="login-form-group">
                         <label for="login-username">Username or Email </label>
-                        <input type="text" id="login-username" name="userID" required placeholder="Enter your username">
+                        <input type="text" id="login-username" class="form-control" name="userID" required placeholder="Enter your username">
                     </div>
                     
                     <div class="login-form-group">
                         <label for="login-password">Password</label>
-                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
+                        <input type="password" id="login-password" class="form-control" name="password" required placeholder="Enter your password">
                     </div>
                     
-                    <a class="login-forgotPass" href="">Forgot Password</a>
+                    <a class="login-forgotPass" href="#">Forgot Password</a>
 
-                    <button id="login-button" type="submit">Login</button>
+                    <button id="login-button" class="btn" type="submit">Login</button>
                 </form>
 
                 {% with messages = get_flashed_messages() %}
@@ -47,5 +48,6 @@
             </div>
         </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

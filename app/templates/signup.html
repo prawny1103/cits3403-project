@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-up Page</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main id="signup-page">
-        <section class="signup-block">
+    <main id="signup-page" class="d-flex align-items-center justify-content-center">
+        <section class="signup-block shadow">
             <div class="signup-wrapper">
             <p class="signup-join-name">Join agileGroup</p>
             <p class="signup-create-your-account-head">Create your account</p>
@@ -19,22 +20,30 @@
                 <form method="POST" action="{{url_for('auth.signup')}}">
                     <div class="signup-form-group">
                         <label for="signup-username">Username <span>*</span></label>
-                        <input type="text" id="signup-username" name="username" required placeholder="JohnDoe123">
+                        <input type="text" id="signup-username"  class="form-control" name="username" required placeholder="JohnDoe123">
                     </div>
                     
                     <div class="signup-form-group">
                         <label for="signup-email">Email <span>*</span></label>
-                        <input type="email" id="signup-email" name="email" required placeholder="johndoe@example.com">
+                        <input type="email" id="signup-email"  class="form-control" name="email" required placeholder="johndoe@example.com">
                     </div>
 
                     <div class="signup-form-group">
                         <label for="signup-password">Password <span>*</span></label>
-                        <input type="password" id="signup-password" name="password" required placeholder="agileGames213">
+                        <input type="password" class="form-control" id="signup-password" name="password" required placeholder="agileGames213">
                     </div>
 
-                    <p>Make sure it's at least 5 characters OR at least 3 characters including a number and a lowecase letter. <a href="">Learn More</a></p>
+                    <p>Make sure it's at least 5 characters OR at least 3 characters including a number and a lowecase letter. <a href="#">Learn More</a></p>
 
-                    <button id="signup-button" type="submit">Join Now</button>
+                    <!-- Re-check this -->
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="alert alert-danger mt-3" role="alert">
+                                {{ messages[0] }}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                    <button id="signup-button" class="btn" type="submit">Join Now</button>
                 </form>
                 
                 <p class="signup-already-got-account-text">
@@ -45,5 +54,6 @@
             </div>
         </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -23,6 +23,7 @@ def create_app():
     socketio.init_app(app)
 
     with app.app_context():
+        from . import socket_events
         db.create_all()
         if Question.query.count() == 0:
             sample_questions = [

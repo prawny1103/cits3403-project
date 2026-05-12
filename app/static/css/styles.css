@@ -139,7 +139,7 @@ header span {
 #login-password,
 #signup-username,
 #signup-password,
-#signup-email {
+#signup-password-confirm {
     font-size: 0.9rem;
     padding: 0.4rem;
     margin: 0.3rem 0;
@@ -153,7 +153,7 @@ header span {
 
 #signup-username,
 #signup-password,
-#signup-email {
+#signup-password-confirm {
     border: 2px solid rgba(255, 255, 255, 0);
 }
 
@@ -165,7 +165,7 @@ header span {
 
 #signup-username:hover,
 #signup-password:hover,
-#signup-email:hover {
+#signup-password-confirm:hover {
     border: 2px solid rgb(105, 105, 228);
 }
 

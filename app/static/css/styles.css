@@ -46,12 +46,9 @@ header span {
     height: 100vh;
 }
 
-#signup-page {
-    background-color: rgb(28, 28, 28);
-}
-
+#signup-page,
 #login-page {
-    background-color: rgb(15, 69, 86);
+    background-color: rgb(28, 28, 28);
 }
 
 /* shared block styles */
@@ -126,13 +123,11 @@ header span {
 
 .login-block h1 {
     font-size: 3rem;
-    background-color: #77c1f2;
     width: 100%;
     text-align: center;
     padding: 0.5rem 0;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    border-bottom: 2px solid black;
 }
 
 #login-username,
@@ -146,11 +141,8 @@ header span {
     border-radius: 0.5rem;
 }
 
-#login-username,
-#login-password {
-    border: 2px solid #77c1f2;
-}
-
+#login-username, 
+#login-password,
 #signup-username,
 #signup-password,
 #signup-password-confirm {
@@ -158,11 +150,7 @@ header span {
 }
 
 #login-username:hover,
-#login-password:hover {
-    border-color: rgb(0, 0, 0);
-    transition: 0.2s;
-}
-
+#login-password:hover,
 #signup-username:hover,
 #signup-password:hover,
 #signup-password-confirm:hover {
@@ -177,16 +165,8 @@ header span {
     font-weight: bold;
 }
 
+#signup-button,
 #login-button {
-    font-size: 1.2rem;
-    margin-top: 4rem;
-    background-color: #77c1f2;
-    padding: 1.5rem 0;
-    width: 40%;
-    border-radius: 4rem;
-}
-
-#signup-button {
     font-size: 1.1rem;
     margin-top: 2rem;
     background-color: rgb(65, 208, 82);
@@ -238,13 +218,15 @@ header span {
     margin-left: 0.3rem;
 }
 
-.signup-form-group span {
+.signup-form-group span,
+.login-form-group span {
     color: red;
 }
 
 .signup-already-got-account-text {
     font-size: 0.8rem;
 }
+
 /* landing page */
 
 .bg-blue {

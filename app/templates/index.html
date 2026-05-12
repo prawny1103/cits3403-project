@@ -4,51 +4,59 @@
         <title>Agile Quiz</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     </head>
 
-    <body>
-        <main id="landing-page">
-        <div class="container mt-5">
+    <body id="landing-body">
+        <header class="landing-header d-flex align-items-center justify-content-between">
+            <nav class="d-flex align-items-center justify-content-between">
 
-            <div class="border border-dark border-4 rounded-5 overflow-hidden shadow">
+                <a href="" class="login-nav-left-container d-flex justify-content-center align-items-center">
+                    <img class="me-3 pb-1" src="{{ url_for('static', filename='images/minecraft-logo.svg') }}" alt="app-logo">
+                    <h1 class="fw-bold m-0">AGILE QUIZ</h1>
+                </a>
 
-                <div class="bg-blue p-4 d-flex justify-content-between align-items-center border-bottom border-dark border-4 landing-text">
-                    <h1>Agile Quiz</h1>
-                    <div class="small-text text-end">
+                <div class="login-nav-right-container d-flex justify-content-between align-items-center text-end">
                         {% if current_user.is_authenticated %}
                             <h3>Signed in as {{ current_user.username }}</h3>
                             <h3><a href="{{ url_for('auth.logout') }}">Log Out</a></h3>
                         {% else %}
-                            <h3><a href="{{ url_for('auth.login') }}">Sign In</a></h3>
-                            <h3><a href="{{ url_for('auth.signup') }}">Register</a></h3>
+                            <a class="login-nav-not-authenticated" href="{{ url_for('auth.login') }}">LOGIN</a>
+                            <a class="login-nav-not-authenticated" href="{{ url_for('auth.signup') }}">REGISTER</a>
                         {% endif %}
                     </div>
-                </div>
 
-                <div class="bg-white p-5 text-center" style="min-height: 450px;">
-                    <div class="row">
-                        <div class="col-8 text-center">
-                            <h1 class="display-2 fw-bold landing-text">Welcome to</h1>
+            </nav>
+        </header>
+        
+        <main id="landing-page-main" class="d-flex justify-content-center align-items-center">
+            <div class="landing-container d-flex justify-content-center align-items-start">
+                <div class="landing-inner-container-width d-flex flex-column justify-content-center align-items-center">
+
+                    <div class="landing-inner2-container-top d-flex justify-content-between align-items-end">
+                        <div class="landing-inner3-container-left d-flex flex-column align-items-start">
+                            <h1 class="welcome-text-body">Welcome to</h1>
+                            <h1 class="game-name-body fw-bold">AGILE QUIZ</h1>
+                        </div>
+                        <div class="landing-inner3-container-right d-flex flex-column justify-content-around align-items-end">
+                            <button id="create-room-btn" type="button" class="btn">Create Room</button>
+                            <button id="join-room-btn" type="button" class="btn">Join Room</button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-4"></div><div class="col-8 text-center">
-                            <h1 class="display-1 fw-bold landing-text">Agile Quiz</h1>
+
+                    <div class="landing-inner2-container-bottom d-flex align-items-center justify-content-center mt-3">
+                        <div id="login-alert" class="alert alert-warning mt-3" role="alert">
+                            Please log in to create or join a room.
                         </div>
                     </div>
-                
-                <div class="d-flex justify-content-center gap-5 mt-4">
-                    <button id="create-room-btn" type="button" class="btn btn-blue rounded-pill px-5 py-3 fw-bold border border-dark border-2">Create Room</button>
-                    <button id="join-room-btn" type="button" class="btn btn-blue rounded-pill px-5 py-3 fw-bold border border-dark border-2">Join Room</button>
-                </div>
 
-                <div id="login-alert" class="alert alert-warning mt-3" role="alert">
-                    Please log in to create or join a room.
-                </div>
+                </div>                
             </div>
-        </div>
         </main>
 
         <script>

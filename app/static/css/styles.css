@@ -4,57 +4,175 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
+
+/*-----------------------------------------------------*/
+/* shared selectors */
+#landing-body,
+#signup-page, 
+#login-page {
+    background-color: rgb(28, 28, 28);
+} 
+
+/* shared end */
+/*-----------------------------------------------------*/
+
+
+/*-----------------------------------------------------*/
+/* Landing Page (index.html) */
+
+#landing-body { /* can merge this, maybe separate cat*/
+    height: 100vh;
 }
 
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgb(168, 83, 229);
+/* nav bar */
+.landing-header {
+    width: 100%;
+    height: 8%;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#landing-body nav {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.3);
+    /* background-color: rgb(65, 208, 82); */
 }
 
-header img {
-    height: 2rem;
-}
-
-header a {
-    display: flex;
-    align-items: center;
-    font-size: 1.4rem;
-    font-weight: bold;
+.login-nav-left-container {
+    color: white;
     text-decoration: none;
-    margin: 0.6rem 1.2rem;
+    border: 2px solid rgb(0, 0, 0, 0);
+    padding: 0.1rem 1rem;
+    margin: 0.5rem 1.5rem;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.login-nav-left-container:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid rgb(0, 0, 0);
+    filter: grayscale(100%)
+}
+
+.login-nav-left-container img{
+    width: 2.2rem;
+}
+
+.login-nav-right-container {
+    margin: 0.5rem 1.5rem;
+    border-radius: 25px;
+    padding: 0.1rem 1rem;
+    width: 17%;
+}
+
+.login-nav-not-authenticated {
+    text-decoration: none;
+    font-size: 1.8rem;
+    color: white;
+    border-radius: 25px;
+    padding: 0.1rem 1rem;
+    transition: 0.2s;
+}
+
+.login-nav-not-authenticated:hover {
+    background-color: white;
     color: black;
 }
 
-header span {
-    margin: 0 0.5rem;
+/* nav bar end */
+
+/* landing page main body*/
+#landing-page-main {
+    width: 100%;
+    height: 92%;
 }
 
+.landing-container {
+    width: 80%;
+    height: 100%;
+}
+
+.landing-inner-container-width {
+    height: 60%;
+    width: 75%;
+}
+
+/* welcome text & create/join room btns*/
+.landing-inner2-container-top {
+    height: 80%;
+    width: 100%;
+}
+
+.landing-inner3-container-left {
+    color: white;
+    width: 50%;
+    height: 40%;
+}
+
+.welcome-text-body {
+    font-size: 4rem;
+}
+
+.game-name-body {
+    font-size: 6rem;
+}
+
+.landing-inner3-container-right {
+    color: white;
+    width: 50%;
+    height: 40%;
+}
+
+#create-room-btn, #join-room-btn {
+    color: black;
+    background-color: rgb(65, 208, 82);
+    font-size: 1.6rem;
+    width: 70%;
+    transition: 0.2s;
+}
+
+#create-room-btn:hover, #join-room-btn:hover {
+    color: black;
+}
+
+/* welcome text & create/join room btn end */
+
+/* Login alert styles */
+.landing-inner2-container-bottom {
+    width: 100%;
+}
+
+#login-alert {
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+        
+#login-alert.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(20px);
+    color: red;
+    background-color: rgb(45, 45, 45, 0.8);
+    border: none;
+}
+
+/* login alert styles end */ 
+/* landing page end */
+/*-----------------------------------------------------*/
+
+
+/*-----------------------------------------------------*/
 /* login and signup page */
 
 #login-page,
 #signup-page {
     height: 100vh;
 }
-
-#signup-page {
-    background-color: rgb(28, 28, 28);
-}
-
-#login-page {
-    background-color: rgb(15, 69, 86);
-}
-
-/* shared block styles */
 
 .login-block,
 .signup-block {
@@ -67,15 +185,10 @@ header span {
     border: 2px solid rgb(0, 0, 0);
 }
 
-.login-block {
+.login-block,
+.signup-block {
     background-color: rgba(255, 255, 255, 0.9);
 }
-
-.signup-block {
-    background-color: rgba(255, 255, 255, 0.85);
-}
-
-/* shared wrapper styles */
 
 .login-wrapper,
 .signup-wrapper {
@@ -89,8 +202,6 @@ header span {
 .login-wrapper {
     padding-top: 5rem;
 }
-
-/* shared form styles */
 
 .login-wrapper form,
 .signup-block form {
@@ -122,50 +233,39 @@ header span {
     margin-top: 1rem;
 }
 
-/* login page */
-
 .login-block h1 {
     font-size: 3rem;
-    background-color: #77c1f2;
     width: 100%;
     text-align: center;
     padding: 0.5rem 0;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    border-bottom: 2px solid black;
 }
 
 #login-username,
 #login-password,
 #signup-username,
 #signup-password,
-#signup-email {
+#signup-password-confirm {
     font-size: 0.9rem;
     padding: 0.4rem;
     margin: 0.3rem 0;
     border-radius: 0.5rem;
 }
 
-#login-username,
-#login-password {
-    border: 2px solid #77c1f2;
-}
-
+#login-username, 
+#login-password,
 #signup-username,
 #signup-password,
-#signup-email {
+#signup-password-confirm {
     border: 2px solid rgba(255, 255, 255, 0);
 }
 
 #login-username:hover,
-#login-password:hover {
-    border-color: rgb(0, 0, 0);
-    transition: 0.2s;
-}
-
+#login-password:hover,
 #signup-username:hover,
 #signup-password:hover,
-#signup-email:hover {
+#signup-password-confirm:hover {
     border: 2px solid rgb(105, 105, 228);
 }
 
@@ -177,16 +277,8 @@ header span {
     font-weight: bold;
 }
 
+#signup-button,
 #login-button {
-    font-size: 1.2rem;
-    margin-top: 4rem;
-    background-color: #77c1f2;
-    padding: 1.5rem 0;
-    width: 40%;
-    border-radius: 4rem;
-}
-
-#signup-button {
     font-size: 1.1rem;
     margin-top: 2rem;
     background-color: rgb(65, 208, 82);
@@ -220,8 +312,6 @@ header span {
     transition: 0.2s;
 }
 
-/* signup page */
-
 .signup-join-name {
     margin-top: 2.5rem;
     font-size: 1rem;
@@ -238,38 +328,20 @@ header span {
     margin-left: 0.3rem;
 }
 
-.signup-form-group span {
+.signup-form-group span,
+.login-form-group span {
     color: red;
 }
 
 .signup-already-got-account-text {
     font-size: 0.8rem;
 }
-/* landing page */
 
-.bg-blue {
-    background-color: #77c1f2;
-}
+/* login and signup page end */ 
+/*-----------------------------------------------------*/
 
-.btn-blue {
-    background-color: #77c1f2;
-    color: black;
-    font-size: 1.2rem;
-}
 
-.overflow-hidden {
-    overflow: hidden;
-}
-
-.landing-text {
-    font-family: "Arial Rounded MT Bold", sans-serif;
-}
-
-#landing-page a {
-    text-decoration: none;
-    color: black;
-}
-
+/*-----------------------------------------------------*/
 /* Question: true or false type */
 #tf-question #question-text {
     align-content: center;
@@ -350,16 +422,3 @@ header span {
 }
 
 
-/* Login alert styles */
-#login-alert {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-20px);
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
-}
-        
-#login-alert.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}

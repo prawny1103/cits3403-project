@@ -13,17 +13,18 @@
 <body>
     <main id="login-page" class="d-flex align-items-center justify-content-center">
         <section class="login-block shadow">
-            <h1>Sign In</h1>
             <div class="login-wrapper">
+                <p>Please enter your details</p>
+                <h1>Welcome back</h1>
 
                 <form method="POST" action="{{ url_for('auth.login') }}">
                     <div class="login-form-group">
-                        <label for="login-username">Username or Email </label>
+                        <label for="login-username">Username <span>*</span></label>
                         <input type="text" id="login-username" class="form-control" name="userID" required placeholder="Enter your username">
                     </div>
                     
                     <div class="login-form-group">
-                        <label for="login-password">Password</label>
+                        <label for="login-password">Password <span>*</span></label>
                         <input type="password" id="login-password" class="form-control" name="password" required placeholder="Enter your password">
                     </div>
                     

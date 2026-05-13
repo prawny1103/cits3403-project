@@ -616,10 +616,10 @@
 
 .joinRoom-container {
     width: 40%;
-    height: 60%;
+    height: 50%;
     color: white;
     border-radius: 20px;
-    background-color: rgb(40, 40, 40);
+    /* background-color: rgb(40, 40, 40);*/
 }
 
 .joinRoom-description {

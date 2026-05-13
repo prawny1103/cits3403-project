@@ -23,13 +23,13 @@
 
                 <div class="login-nav-right-container d-flex justify-content-between align-items-center text-end">
                         {% if current_user.is_authenticated %}
-                            <h3>Signed in as {{ current_user.username }}</h3>
-                            <h3><a href="{{ url_for('auth.logout') }}">Log Out</a></h3>
+                            <h3 class="login-nav-authenticated-username m-0"> {{ current_user.username }} </h3>
+                            <a class="login-nav-authenticated-logout" href="{{ url_for('auth.logout') }}">Log Out</a>
                         {% else %}
                             <a class="login-nav-not-authenticated" href="{{ url_for('auth.login') }}">LOGIN</a>
                             <a class="login-nav-not-authenticated" href="{{ url_for('auth.signup') }}">REGISTER</a>
                         {% endif %}
-                    </div>
+                </div>
 
             </nav>
         </header>

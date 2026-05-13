@@ -24,8 +24,16 @@
 }
 
 /* nav bars shared */
+.landing-header,
+.joinRoom-header,
+.crtRoom-header {
+    width: 100%;
+    height: 8%;
+}
+
 #landing-body nav,
-#joinRoom-page nav {
+#joinRoom-page nav,
+#crtRoom-page nav {
     width: 100%;
     height: 100%;
     background-color: rgb(0, 0, 0, 0.3);
@@ -33,7 +41,8 @@
 
 .login-nav-not-authenticated, 
 .login-nav-authenticated-logout,
-.joinRoom-nav-left-container a{
+.joinRoom-nav-left-container a,
+.crtRoom-nav-left-container a{
     text-decoration: none;
     font-size: 1.8rem;
     color: white;
@@ -44,7 +53,31 @@
 
 .login-nav-not-authenticated:hover, 
 .login-nav-authenticated-logout:hover,
-.joinRoom-nav-left-container a:hover {
+.joinRoom-nav-left-container a:hover,
+.crtRoom-nav-left-container a:hover {
+    background-color: white;
+    color: black;
+}
+
+.joinRoom-nav-right-container,
+.crtRoom-nav-right-container {
+    font-size: 2rem;
+    color: rgb(65, 208, 82);
+    text-decoration: none;
+    border: 2px solid rgb(0, 0, 0, 0);
+    padding: 0.1rem 1rem;
+    margin: 0.5rem 1.5rem;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.joinRoom-nav-right-container h3,
+.crtRoom-nav-right-container h3{
+    font-size: 2rem;
+}
+
+.joinRoom-nav-right-container:hover,
+.crtRoom-nav-right-container:hover {
     background-color: white;
     color: black;
 }
@@ -395,78 +428,187 @@
 
 /*-----------------------------------------------------*/
 /* createRoom page */
-#crtRoom-page {
-    height: 100vh;
-}
-
-#crtRoom-container {
-    width: 70%;
-    height: 80%;
-}
-
-#crtRoom-page #question-text {
-    align-content: center;
-    text-align: center;
-    min-width: 700px;
-    min-height: 200px;
-    font-size: 30px;
-}
-
-#answer-multi {
-    display: grid;
-    justify-content: center;
-    padding-bottom: 80px;
-    gap: 210px;
-    row-gap: 50px;
-    /* create 2x2 grid with equal sizes */
-    grid-template-rows: repeat(2, 80px);
-    grid-template-columns: repeat(2, 250px);
-}
-
-#answer-multi button {
-    background-color: white;
-    color: black;
-    font-size: 1.2rem;
-    border: 2px solid #77c1f2;
-    height: 80px;
-    width: 250px;
-}
-
-/* createRoom page end */
-/*-----------------------------------------------------*/
-
-/*-----------------------------------------------------*/
-/* joinRoom page */
-
-/* joinRoom Navbar **combine top later */
-#joinRoom-page header {
+#crtRoom-body {
     width: 100%;
-    height: 8%
+    height: 92%;
 }
 
-.joinRoom-nav-right-container {
-    font-size: 2rem;
-    color: rgb(65, 208, 82);
-    text-decoration: none;
-    border: 2px solid rgb(0, 0, 0, 0);
-    padding: 0.1rem 1rem;
-    margin: 0.5rem 1.5rem;
+.crtRoom-container {
+    width: 40%;
+    height: 100%;
+    border-radius: 25px;
+}
+
+
+.crtRoom-container h2, 
+.crtRoom-container p {
+    color: white;
+    text-align: center;
+}
+
+.crtRoom-container h2 {
+    font-size: 3rem;
+}
+
+.crtRoom-container p {
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.crtRoom-form {
+    width: 80%;
+    height: 60%;
+}
+
+.crtRoom-qType-container {
+    color: white;
+    height: 45%;
+    background-color: rgb(40, 40, 40);
     border-radius: 20px;
+}
+
+.crtRoom-qType-container h5 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.crtRoom-preset-container,
+.crtRoom-rand-container {
+    width: 48%;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    text-align: center;
+    color: black;
+    background-color: white;
+    transition: 0.3s;
+    padding: 0.5rem 0;
+}
+
+.crtRoom-preset-container:hover,
+.crtRoom-rand-container:hover {
+    background-color: rgb(255, 255, 255, 0.5);
+}
+
+.crtRoom-preset-container input,
+.crtRoom-rand-container input{
+    display: none;
+}
+
+.crtRoom-rand-container:has(input:checked),
+.crtRoom-preset-container:has(input:checked) {
+    background-color: rgb(65, 208, 82);
+    color: black;
+}
+
+.crtRoom-preset-container input:checked,
+.crtRoom-rand-container input:checked {
+    background-color: rgb(65, 208, 82);
+    color: black;
+}
+
+#random-settings,
+#preset-options {
+    width: 98%;
+    margin: auto;
+}
+
+.random-setting {
+    width: 49%;
+}
+
+.random-setting label {
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+}
+
+.random-setting select {
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 10px;
+    padding: 0.5rem 0.8rem;
+}
+
+.preset-setting {
+    width: 100%;
+}
+
+.preset-setting label {
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+}
+
+.preset-setting select {
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 0.5rem 0.8rem;
+}
+
+/* Timer section */
+.crtRoom-timer-container {
+    background-color: rgb(40, 40, 40);
+    border-radius: 25px;
+    color: white;
+}
+
+.crtRoom-timer-container h5 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.timer-btn {
+    width: 30%;
+    font-size: 1.2rem;
+    color: white;
+    padding: 0.5rem 0;
+    transition: 0.2s;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.3rem;
+}
+
+.timer-btn:not(.selected) {
+    background-color: white;
+}
+
+.timer-btn:not(.selected):hover {
+    background-color: rgb(31, 74, 125, 0.5);
+    color: white;
+
+}
+
+.timer-btn.selected {
+    background-color: rgb(31, 74, 125);
+}
+
+/* Timer section end */ 
+
+/* host room button */
+.crtRoom-button-container {
+    text-align: center;
+    width: 100%;
+    background-color: rgb(65, 208, 82);
+    border-radius: 10px;
     transition: 0.2s;
 }
 
-.joinRoom-nav-right-container h3 {
-    font-size: 2rem;
+.crtRoom-button-container button {
+    font-size: 1.3rem;
 }
 
-.joinRoom-nav-right-container:hover {
+.crtRoom-button-container:hover {
     background-color: white;
-    color: black;
 }
 
-/* joinRoom Navbar end */ 
+/* host room button end */
+/* createRoom page end */
+/*-----------------------------------------------------*/
 
-/* joinRoom body */
+
+/*-----------------------------------------------------*/
+/* joinRoom page */
 #joinRoom-body {
     width: 100%;
     height: 92%;
@@ -530,8 +672,7 @@
     color: black;
 }
 
-/* joinRoom body end */
-/* joinRoom page end
+/* joinRoom page end */
 /*-----------------------------------------------------*/
 /*-----------------------------------------------------*/
 
@@ -556,4 +697,22 @@
     color: white;
 }
 
+#answer-multi {
+    display: grid;
+    justify-content: center;
+    padding-bottom: 80px;
+    gap: 210px;
+    row-gap: 50px;
+    /* create 2x2 grid with equal sizes */
+    grid-template-rows: repeat(2, 80px);
+    grid-template-columns: repeat(2, 250px);
+}
 
+#answer-multi button {
+    background-color: white;
+    color: black;
+    font-size: 1.2rem;
+    border: 2px solid #77c1f2;
+    height: 80px;
+    width: 250px;
+}

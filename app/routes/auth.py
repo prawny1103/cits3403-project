@@ -9,7 +9,6 @@ auth_bp = Blueprint('auth', __name__)
 def signup():
     if (request.method == 'POST'):
         username = request.form.get('username')
-        # email = request.form.get('email')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
@@ -23,7 +22,6 @@ def signup():
 
         new_user = User(
             username=username,
-            # email=email,
             password_hash=generate_password_hash(password)
         )
 

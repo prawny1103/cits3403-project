@@ -6,12 +6,50 @@
 
 
 /*-----------------------------------------------------*/
-/* shared selectors */
+/* shared */
 #landing-body,
 #signup-page, 
-#login-page {
+#login-page,
+#crtRoom-page,
+#joinRoom-page {
     background-color: rgb(28, 28, 28);
 } 
+
+#login-page,
+#signup-page,
+#landing-body,
+#crtRoom-page,
+#joinRoom-page {
+    height: 100vh;
+}
+
+/* nav bars shared */
+#landing-body nav,
+#joinRoom-page nav {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.3);
+}
+
+.login-nav-not-authenticated, 
+.login-nav-authenticated-logout,
+.joinRoom-nav-left-container a{
+    text-decoration: none;
+    font-size: 1.8rem;
+    color: white;
+    border-radius: 25px;
+    padding: 0.1rem 1rem;
+    transition: 0.2s;
+}
+
+.login-nav-not-authenticated:hover, 
+.login-nav-authenticated-logout:hover,
+.joinRoom-nav-left-container a:hover {
+    background-color: white;
+    color: black;
+}
+
+/* nav bars shared end *
 
 /* shared end */
 /*-----------------------------------------------------*/
@@ -20,21 +58,10 @@
 /*-----------------------------------------------------*/
 /* Landing Page (index.html) */
 
-#landing-body { /* can merge this, maybe separate cat*/
-    height: 100vh;
-}
-
 /* nav bar */
 .landing-header {
     width: 100%;
     height: 8%;
-}
-
-#landing-body nav {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(0, 0, 0, 0.3);
-    /* background-color: rgb(65, 208, 82); */
 }
 
 .login-nav-left-container {
@@ -62,21 +89,16 @@
     margin: 0.5rem 1.5rem;
     border-radius: 25px;
     padding: 0.1rem 1rem;
-    width: 17%;
+    gap: 1rem;
+    width: 18%;
+    max-width: 30rem;
+    min-width: 0;
+    border: 2px solid;
 }
 
-.login-nav-not-authenticated {
-    text-decoration: none;
-    font-size: 1.8rem;
-    color: white;
-    border-radius: 25px;
-    padding: 0.1rem 1rem;
-    transition: 0.2s;
-}
-
-.login-nav-not-authenticated:hover {
-    background-color: white;
-    color: black;
+.login-nav-authenticated-username {
+    color: rgb(65, 208, 82);
+    font-size: 2rem;
 }
 
 /* nav bar end */
@@ -168,11 +190,6 @@
 
 /*-----------------------------------------------------*/
 /* login and signup page */
-
-#login-page,
-#signup-page {
-    height: 100vh;
-}
 
 .login-block,
 .signup-block {
@@ -372,9 +389,22 @@
     height: 80px;
     width: 250px;
 }   
+/* tfquestion page end */
+/*-----------------------------------------------------*/
 
-/* Question: multichoice type */
-#multichoice-question #question-text {
+
+/*-----------------------------------------------------*/
+/* createRoom page */
+#crtRoom-page {
+    height: 100vh;
+}
+
+#crtRoom-container {
+    width: 70%;
+    height: 80%;
+}
+
+#crtRoom-page #question-text {
     align-content: center;
     text-align: center;
     min-width: 700px;
@@ -401,6 +431,111 @@
     height: 80px;
     width: 250px;
 }
+
+/* createRoom page end */
+/*-----------------------------------------------------*/
+
+/*-----------------------------------------------------*/
+/* joinRoom page */
+
+/* joinRoom Navbar **combine top later */
+#joinRoom-page header {
+    width: 100%;
+    height: 8%
+}
+
+.joinRoom-nav-right-container {
+    font-size: 2rem;
+    color: rgb(65, 208, 82);
+    text-decoration: none;
+    border: 2px solid rgb(0, 0, 0, 0);
+    padding: 0.1rem 1rem;
+    margin: 0.5rem 1.5rem;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.joinRoom-nav-right-container h3 {
+    font-size: 2rem;
+}
+
+.joinRoom-nav-right-container:hover {
+    background-color: white;
+    color: black;
+}
+
+/* joinRoom Navbar end */ 
+
+/* joinRoom body */
+#joinRoom-body {
+    width: 100%;
+    height: 92%;
+}
+
+.joinRoom-container {
+    width: 40%;
+    height: 60%;
+    color: white;
+    border-radius: 20px;
+    background-color: rgb(40, 40, 40);
+}
+
+.joinRoom-description {
+    height: 100%;
+}
+
+.joinRoom-description h3{
+    font-size: 3rem;
+}
+
+.joinRoom-description p {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+}
+
+.joinRoom-form {
+    width: 100%;
+    width: 80%;
+    border-radius: 20px;
+    background-color: rgb(0, 0, 0, 0.1);
+}
+
+.joinRoom-form label {
+    color: rgb(65, 208, 82);
+    font-size: 1.6rem;
+}
+
+.joinRoom-form input {
+    text-align: center;
+    width: 90%;
+    font-size: 2rem;
+    letter-spacing: 10px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255, 0.6);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.joinRoom-form button {
+    color: black;
+    width: 90%;
+    background-color: rgb(65, 208, 82);
+    border: 2px solid rgb(0, 0, 0);
+    font-size: 2rem;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.joinRoom-form button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* joinRoom body end */
+/* joinRoom page end
+/*-----------------------------------------------------*/
+/*-----------------------------------------------------*/
+
+/*-----------------------------------------------------*/
 
 .btn-correct {
     background-color: green !important;

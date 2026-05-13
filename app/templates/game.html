@@ -45,11 +45,25 @@
             socket.on('start_game', function() {
                 window.location.href = `/quiz/${roomCode}/start`;
             });
+
+            // Listen for the next question
+            socket.on('next_question', function(data) {
+                setQuestion(data.text, data.id);
+            });
         </script>
         <script>
             function startGame() {
                 // Send signal to server to start the game
                 socket.emit('start_game', { room_code: "{{ room_code }}" });
+            }
+
+            function submitChoice(choice) {
+                const qId = document.getElementById('question-text').getAttribute('question-id');
+                socket.emit('submit_answer', {
+                    room_code: roomCode,
+                    question_id: qId,
+                    choice: choice
+                });
             }
         </script>
     </body>

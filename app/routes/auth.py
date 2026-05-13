@@ -9,16 +9,19 @@ auth_bp = Blueprint('auth', __name__)
 def signup():
     if (request.method == 'POST'):
         username = request.form.get('username')
-        email = request.form.get('email')
         password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
 
-        if (User.query.filter_by(email=email).first()):
-            flash('An account with this email already exists')
+        if password != confirm_password:
+            flash('Passwords do not match')
+            return redirect(url_for('auth.signup'))
+
+        if (User.query.filter_by(username=username).first()):
+            flash('Username already exists')
             return redirect(url_for('auth.signup'))
 
         new_user = User(
             username=username,
-            email=email,
             password_hash=generate_password_hash(password)
         )
 
@@ -38,15 +41,16 @@ def login():
         return redirect(url_for('main.home'))
     
     if (request.method == 'POST'):
-        userID = request.form.get('userID')
+        username = request.form.get('username')
         password = request.form.get('password')
         
-        user = User.query.filter((User.email == userID) | (User.username == userID)).first()
+        user = User.query.filter_by(username=username)
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
             return redirect(url_for('main.home'))
         
         flash('Invalid credentials')
+
     return render_template('login.html')
 
 @auth_bp.route('/logout')

@@ -166,13 +166,21 @@ def handle_response(data):
             state['advance_timer'].cancel() # Cancel the auto-advance timer
         
         # Show scores than advance
-        socketio.emit('show_scores', {'scores': state['scores']}, to=room_code)
+
         state['current'] += 1
 
-        t = threading.Timer(3.0, send_next_question, args=[room_code])
+        def advance():
+            with _app.app_context():
+                socketio.emit('show_scores', {'scores': state['scores']}, to=room_code)
+                t = threading.Timer(3.0, send_next_question, args=[room_code])
+                t.daemon = True
+                t.start()
+                state['advance_timer'] = t
+
+        t = threading.Timer(2.0, advance)
         t.daemon = True
         t.start()
-        state['advance_timer'] = t
+
 
 @socketio.on('request_question')
 def handle_request_question(data):

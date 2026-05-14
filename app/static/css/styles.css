@@ -888,3 +888,28 @@
         width: clamp(1.5rem, 3vw, 2.2rem);
     }
 }
+
+/* responsive fixes for small laptop landing content */
+@media (min-width: 1025px) and (max-width: 1400px) {
+    .landing-container {
+        width: 90%;
+    }
+
+    .landing-inner-container-width {
+        width: 85%;
+    }
+
+    .welcome-text-body {
+        font-size: 3.2rem;
+    }
+
+    .game-name-body {
+        font-size: 4.5rem;
+    }
+
+    #create-room-btn,
+    #join-room-btn {
+        width: 75%;
+        font-size: 1.2rem;
+    }
+}

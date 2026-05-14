@@ -59,7 +59,6 @@ def send_next_question(room_code):
             'time_limit': state.get('time_limit')
         }, to=room_code)
 
-        print(json.loads(question.choices))
     else:
         emit('game_over', {'final_scores': state['scores']}, to=room_code)
 

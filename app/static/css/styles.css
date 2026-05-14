@@ -1370,3 +1370,38 @@
         margin-top: 1.5rem;
     }
 }
+
+/* fix create room select layout alignment */
+.crtRoom-qType-container {
+    height: auto;
+    min-height: fit-content;
+    overflow: visible;
+}
+
+#random-settings {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.random-setting {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.random-setting label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.random-setting select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.crtRoom-timer-container {
+    margin-top: 2rem;
+    height: auto;
+    min-height: fit-content;
+}

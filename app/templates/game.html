@@ -6,10 +6,11 @@
         <title>Agile Quiz</title>
     </head>
     <body>
-        <div class="lobby-container">
+        <!-- Game Lobby -->
+        <div id="lobby-screen" class="screen active">
             <h1>Room Code: <span id="display-code">{{ room_code }}</span></h1>
 
-            <h3>Players Joined:</h3>
+            <h3 class="players-label">Players Joined:</h3>
             <ul id="player-list">
 
             </ul>
@@ -17,54 +18,267 @@
             {% if is_host %}
             <button id="start-game" onclick="startGame()">Start Game</button>
             {% else %}
-            <p>Waiting for host to start the game...</p>
+            <p class="waiting-msg">Waiting for host to start the game...</p>
             {% endif %}
         </div>
 
+        <!-- Countdown Screen -->
+        <div id="countdown-screen" class="screen">
+            <div id="countdown-number">3</div>
+            <div id="countdown-label">Get Ready!</div>
+        </div>
+
+        <!-- Question Screen -->
+         <div id="question-screen" class="screen">
+            <div class="card">
+                <div class="q-meta">
+                    <span id="q-progress" class="q-progress">
+                        Q 1 / 10
+                    </span>
+                    <span id="timer-label">15s</span>
+                </div>
+                <div class="timer-wrap">
+                    <div id="timer-bar"></div>
+                </div>
+                <p id="question-text"></p>
+                <div class="choices-grid" id="choices-grid"></div>
+                <div id="feedback-bar"></div>
+            </div>
+         </div>
+
+         <!-- Between-question show scores -->
+          <div id="scores-screen" class="screen">
+            <div class="card">
+                <h2>Current Scores</h2>
+                <div id="scores-list"></div>
+            </div>
+          </div>
+
+          <!-- Game Over Screen -->
+           <div id="gameover-screen" class="screen">
+            <h1>Game Over!</h1>
+            <p class="subtitle">Final Standings</p>
+            <div id="final-scores" class="card"></div>
+            <a href="/" class="btn">Return to Home</a>
+           </div>
+        
+           <!-- Error toast -->
+            <div id="toast"></div>
+        
         <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
         <script>
             const socket = io();
             const roomCode = "{{ room_code }}";
+            const isHost = {{ 'true' if is_host else 'false' }};
+
+            // Screen management
+            function showScreen(id) {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                const el = document.getElementById(id);
+                el.classList.add('active');
+                // Trigger reflow for CSS animations
+                el.style.animation = 'none';
+                el.offsetHeight;
+                el.style.animation = '';
+            }
+
+            // Toast
+            function showToast(msg) {
+                const t = document.getElementById('toast');
+                t.textContent = msg;
+                t.classList.add('show');
+                setTimeout(() => t.classList.remove('show'), 3500);
+            }
+
+            // Timer
+
+            let timerInterval = null;
+            let timerSeconds = 0;
+
+            function startTimer(seconds) {
+                clearInterval(timerInterval);
+                timerSeconds = seconds;
+                const bar = document.getElementById('timer-bar');
+                const label = document.getElementById('timer-label');
+
+                bar.style.transition = 'none';
+                bar.style.width = '100%';
+                bar.className = '';
+                label.textContent = seconds + 's';
+
+                // Let the reset paint first
+                requestAnimationFrame(() => {
+                    bar.style.transition = `width ${seconds}s linear`;
+                    bar.style.width = '0%';
+                });
+
+                timerInterval = setInterval(() => {
+                    timerSeconds--;
+                    label.textContent = timerSeconds + 's';
+                    const pct = (timerSeconds / seconds) * 100;
+                    if (pct < 33) bar.className = 'danger';
+                    else if (pct < 55) bar.className = 'warning';
+                    else bar.className = '';
+                    if (timerSeconds <= 0) {
+                        clearInterval(timerInterval);
+                    }
+                }, 1000);
+            }
+
+            function stopTimer() {
+                clearInterval(timerInterval);
+            }
+
+            // Scoreboard renderer
+            function renderScores(scores, containerId) {
+                const container = document.getElementById(containerId);
+                const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+                const medals = ['gold', 'silver', 'bronze'];
+
+                container.innerHTML = sorted.length === 0
+                    ? '<p style="color:var(--muted);text-align:center">No scores yet</p>'
+                    : sorted.map(([name, pts], i) => `
+                        <div class="score-row" style="animation-delay:${i * 60}ms">
+                            <span class="score-rank ${medals[i] || ''}">${i + 1}</span>
+                            <span class="score-name">${name}</span>
+                            <span class="score-pts">${pts.toLocaleString()}</span>
+                        </div>`).join('');
+            }
+
+            // Countdown then show question
+            function runCountdown(callback) {
+                showScreen('countdown-screen');
+                let n = 3;
+                const el = document.getElementById('countdown-number');
+                el.textContent = n;
+
+                const iv = setInterval(() => {
+                    n--;
+                    if ( n <= 0 ) {
+                        clearInterval(iv);
+                        callback();
+                    } else {
+                        el.textContent = n;
+                    }
+            }, 1000);
+            }
+
+            // Render question
+
+            let currentQuestionId = null;
+            let hasAnswered = false;
+
+            function showQuestion(data) {
+                currentQuestionId = data.id;
+                hasAnswered = false;
+
+                // Progress
+                document.getElementById('q-progress').textContent = `Q ${data.question_number} / ${data.total_questions}`;  
+                // Question text
+                document.getElementById('question-text').innerHTML = data.text;
+                // Choices
+                const grid = document.getElementById('choices-grid');
+                grid.innerHTML = '';
+                const labels = ['A', 'B', 'C', 'D'];
+                Object.entries(data.choices).forEach(([key, val], i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'choice-btn';
+                    btn.dataset.key = key;
+                    btn.innerHTML = `<span class="label">${key}</span><span>${val}</span>`;
+                    btn.onclick = () => submitChoice(key);
+                    grid.appendChild(btn);
+                });
+
+                // Hide feedback bar
+                const fb = document.getElementById('feedback-bar');
+                fb.className = '';
+                fb.style.display = 'none';
+
+                showScreen('question-screen');
+                startTimer(data.time_limit);
+            }
+
+            // Submit answer
+            function submitChoice(key) {
+                if (hasAnswered) return;
+                hasAnswered = true;
+                stopTimer();
+
+                // Dim all buttons
+                document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+                // Highlight selected
+                const selected = document.querySelector(`.choice-btn[data-key="${key}"]`);
+                if (selected) selected.classList.add('wrong'); // assume wrong until server confirms
+
+                socket.emit('submit_answer', {
+                    room_code: roomCode,
+                    question_id: currentQuestionId,
+                    choice: key
+                });
+            }
+
+            // Socket events
 
             // Tell the server we have joined the room
             socket.emit('join_room', { room_code: roomCode });
 
             // Listen for updates to the player list
-            socket.on('update_players', function(data) {
-                console.log("Received player list update:", data); // Debug log
-                const playerList = document.getElementById('player-list');
-                playerList.innerHTML = '';
-                data.players.forEach(player => {
-                    const li = document.createElement('li');
-                    li.textContent = player;
-                    playerList.appendChild(li);
+            socket.on('update_players', (data) => {
+                const list = document.getElementById('player-list');
+                list.innerHTML = data.players.map(p => `<li>${p}</li>`).join('');
+            });
+            
+            socket.on('game_starting', () => {
+                runCountdown(() => {
+                    socket.emit('request_question', { room_code: roomCode });
                 });
             });
 
-            // Listen for the game start signal (redirects everyone to the quiz page)
-            socket.on('start_game', function() {
-                window.location.href = `/quiz/${roomCode}/start`;
+            socket.on('next_question', (data) => {
+                showQuestion(data);
             });
 
-            // Listen for the next question
-            socket.on('next_question', function(data) {
-                setQuestion(data.text, data.id);
+            socket.on('answer_result', (data) => {
+                const fb = document.getElementById('feedback-bar');
+                // Reveal correct answer on all buttons
+                document.querySelectorAll('.choice-btn').forEach(b => {
+                    if (b.dataset.key === data.correct_answer) {
+                        b.classList.remove('wrong');
+                        b.classList.add('correct');
+                    }
+                });
+                if (data.correct) {
+                    fb.className = 'correct';
+                    fb.innerHTML = 'Correct! +' + data.points_earned.toLocaleString() + ' points';
+                } else {
+                    fb.className = 'wrong';
+                    fb.textContent = 'Wrong! The correct answer was ' + data.correct_answer;
+                }
+                fb.style.display = 'flex';
+            })
+
+            socket.on('show_scores', (data) => {
+                renderScores(data.scores, 'scores-list');
+                showScreen('scores-screen');
             });
-        </script>
-        <script>
+
+            socket.on('game_over', (data) => {
+                stopTimer();
+                renderScores(data.final_scores, 'final-scores');
+                showScreen('gameover-screen');
+            });
+
+            socket.on('error', (data) => {
+                showToast(data.message || "Something went wrong.");
+            });
+
             function startGame() {
                 // Send signal to server to start the game
+                const btn = document.getElementById('start-game');
+                if (btn) btn.disabled = true; // prevent multiple clicks
                 socket.emit('start_game', { room_code: "{{ room_code }}" });
             }
 
-            function submitChoice(choice) {
-                const qId = document.getElementById('question-text').getAttribute('question-id');
-                socket.emit('submit_answer', {
-                    room_code: roomCode,
-                    question_id: qId,
-                    choice: choice
-                });
-            }
         </script>
     </body>
 </html>

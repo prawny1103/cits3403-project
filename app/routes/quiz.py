@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 import json
 from app.extensions import db
 from app.models.quiz import Question, Room
+import random
+import requests
 
 quiz_bp = Blueprint('quiz', __name__)
 
@@ -52,19 +54,69 @@ def create_game():
     question_count = request.form.get('question-count')
     time_limit = request.form.get('time-limit')
     difficulty = request.form.get('difficulty')
+    quiz_type = request.form.get('quizType') # Random or Preset
+    preset_category = request.form.get('preset-select') # e.g. "Science", "History" (only used if quiz_type is Preset)
 
     print("Button clicked, creating game...") # Debug log
     code = Room.generate_code()
     if not code:
         return jsonify({"error": "Server is full, please try again later."}), 503
     
-    new_room = Room(room_code=code, 
-                    host_id=current_user.id,
-                    question_count=int(question_count),
-                    time_limit=int(time_limit),
-                    difficulty=str(difficulty))
+    new_room = Room(
+        room_code=code, 
+        host_id=current_user.id,
+        question_count=int(question_count) if question_count else 10,
+        time_limit=int(time_limit) if time_limit else 15,
+        difficulty=str(difficulty) if difficulty else 'Any',
+        quiz_type = quiz_type or 'random',
+        preset_category = preset_category if quiz_type == 'preset' else None,
+    )
+    
     db.session.add(new_room)
+    db.session.flush() # Get the ID of the new room before commit
+
+    if quiz_type == "random":
+        params = {
+            'amount': int(question_count) if question_count else 10,
+            'type': 'multiple'
+        }
+        if difficulty:
+            params['difficulty'] = difficulty
+
+        try:
+            response = requests.get('https://opentdb.com/api.php', params=params, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+
+            if data['response_code'] != 0:
+                raise ValueError(f"OpenTDB response code: {data['response_code']}")
+            
+            for q in data['results']:
+                all_choices = q['incorrect_answers'] + [q['correct_answer']]
+                random.shuffle(all_choices)
+
+                labels = ['A', 'B', 'C', 'D'][:len(all_choices)]
+                choices_dict = {labels[i]: all_choices[i] for i in range(len(all_choices))}
+                correct_label = next(k for k, v in choices_dict.items() if v == q['correct_answer'])
+
+                db.session.add(Question(
+                    room_id=new_room.id,
+                    category = None,
+                    text=q['question'],
+                    correct_answer=correct_label,
+                    question_type="multiple_choice",
+                    choices=json.dumps(choices_dict)
+                ))
+                
+        except (requests.RequestException, ValueError, KeyError) as e:
+            print(f"OpenTDB fetch failed: {e}")
+            db.session.rollback()
+            flash("Could not load questions from external API. Please try again.")
+            return redirect(url_for('main.home'))
+    
+ 
     db.session.commit()
+  
     return redirect(url_for('quiz.game_room', room_code=code))
 
 @quiz_bp.route('/join-game', methods=['POST'])

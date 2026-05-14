@@ -29,7 +29,7 @@ def handle_join(data):
 def handle_start(data):
     room_code = data.get('room_code')
     room = Room.query.filter_by(room_code=room_code).first()
-    questions = Question.query.filter_by(difficulty=room.difficulty).limit(room.question_count).all()
+    questions = Question.query.limit(room.question_count).all()
 
     game_state[room_code] = {
         'questions': [i.id for i in questions],
@@ -47,7 +47,7 @@ def send_next_question(room_code):
     state = game_state[room_code]
     
     if (state['current'] < len(state['questions'])):
-        q_id = state['questions'][state['current_index']]
+        q_id = state['questions'][state['current']]
         question = Question.query.get(q_id)
         
         state['question_start_time'] = time.time()

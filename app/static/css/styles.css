@@ -1086,3 +1086,74 @@
         opacity: 1;
     }
 }
+
+/* responsive fixes for join room page */
+@media (max-width: 768px) {
+    #joinRoom-page {
+        min-height: 100vh;
+        height: auto;
+        overflow-x: hidden;
+    }
+
+    #joinRoom-page nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .joinRoom-nav-left-container a,
+    .joinRoom-nav-right-container h3 {
+        font-size: 1.2rem;
+        padding: 0.2rem 0.5rem;
+        text-align: center;
+    }
+
+    .joinRoom-nav-right-container {
+        margin: 0.2rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    #joinRoom-body {
+        height: auto;
+        min-height: 92vh;
+        padding: 2rem 1rem;
+        overflow-x: hidden;
+    }
+
+    .joinRoom-container {
+        width: 90%;
+        height: auto;
+    }
+
+    .joinRoom-description h3 {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+
+    .joinRoom-description p {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    .joinRoom-form {
+        width: 90%;
+        margin-top: 2rem;
+    }
+
+    .joinRoom-form label {
+        font-size: 1.2rem;
+    }
+
+    .joinRoom-form input {
+        width: 100%;
+        font-size: 1.5rem;
+        letter-spacing: 6px;
+    }
+
+    .joinRoom-form button {
+        width: 100%;
+        font-size: 1.4rem;
+    }
+}

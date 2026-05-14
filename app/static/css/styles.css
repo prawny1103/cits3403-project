@@ -1303,3 +1303,70 @@
         margin-top: 1.5rem;
     }
 }
+ 
+/* responsive fixes for create room tablet and short screen layout */
+@media (min-width: 769px) and (max-width: 1200px), (max-height: 700px) {
+    #crtRoom-page {
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    #crtRoom-body {
+        height: auto;
+        min-height: 92vh;
+        padding: 2rem 1rem;
+        overflow-x: hidden;
+    }
+
+    .crtRoom-container {
+        width: 80%;
+        height: auto;
+    }
+
+    .crtRoom-description h3 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        text-align: center;
+    }
+
+    .crtRoom-description p {
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .crtRoom-question-settings,
+    .crtRoom-timer {
+        width: 80%;
+        height: auto;
+        padding: 1.5rem;
+    }
+
+    .crtRoom-type-buttons,
+    .crtRoom-timer-buttons {
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .crtRoom-type-buttons button,
+    .crtRoom-timer-buttons button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+
+    .crtRoom-select-row {
+        gap: 1rem;
+    }
+
+    .crtRoom-select-group select {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    #host-room-btn {
+        width: 80%;
+        font-size: 1rem;
+        margin-top: 1.5rem;
+    }
+}

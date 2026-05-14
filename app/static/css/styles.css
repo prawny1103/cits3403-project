@@ -464,3 +464,14 @@
     text-align: center;
     margin: 0.5rem auto;
 }
+
+#choices-grid{
+    display: grid;
+    justify-content: center;
+    padding-bottom: 80px;
+    gap: 210px;
+    row-gap: 50px;
+    /* create 2x2 grid with equal sizes */
+    grid-template-rows: repeat(2, 80px);
+    grid-template-columns: repeat(2, 250px);
+}

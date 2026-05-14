@@ -1043,3 +1043,46 @@
         opacity: 1;
     }
 }
+
+/* responsive fixes for login and register pages on short screens */
+@media (min-width: 769px) and (max-height: 850px) {
+    #login-page,
+    #signup-page {
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
+
+    .login-block,
+    .signup-block {
+        height: auto;
+        min-height: fit-content;
+        padding: 1.5rem 0;
+    }
+
+    .login-wrapper {
+        padding-top: 1.5rem;
+    }
+
+    .signup-join-name {
+        margin-top: 1rem;
+    }
+
+    .signup-create-your-account-head {
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.1;
+    }
+
+    #login-button,
+    #signup-button {
+        color: black;
+        margin-top: 1.5rem;
+    }
+
+    .login-bottom-text,
+    .signup-already-got-account-text,
+    .signup-block form p {
+        color: black;
+        opacity: 1;
+    }
+}

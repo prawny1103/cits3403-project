@@ -66,7 +66,7 @@
                                                         <div class="col-md-6">
                                                             <div>
                                                                 <label class="form-label fw-bold">Number of questions</label>
-                                                                <select id="question-count" class="form-select rounded-pill px-4 py-3 border border-primary" aria-label="Number of questions">
+                                                                <select id="question-count" name="question-count" class="form-select rounded-pill px-4 py-3 border border-primary" aria-label="Number of questions">
                                                                     <option value="5">5</option>
                                                                     <option selected value="10">10</option>
                                                                     <option value="15">15</option>
@@ -77,7 +77,7 @@
                                                         <div class="col-md-6">
                                                             <div>
                                                                 <label class="form-label fw-bold">Difficulty</label>
-                                                                <select id="difficulty" class="form-select rounded-pill px-4 py-3 border border-primary" aria-label="Difficulty">
+                                                                <select id="difficulty" name="difficulty" class="form-select rounded-pill px-4 py-3 border border-primary" aria-label="Difficulty">
                                                                     <option selected>Any</option>
                                                                     <option value="easy">Easy</option>
                                                                     <option value="medium">Medium</option>
@@ -94,13 +94,16 @@
                                                     <h5 class="fw-bold mb-3">Timer</h5>
                                                     <div class="row gy-3">
                                                         <div class="col-4">
-                                                            <button type="button" class="timer-btn btn rounded-pill w-100 px-4 py-3 border border-dark border-2" data-timer="15">15 sec</button>
+                                                            <input type="radio" class="btn-check" name="time-limit" id="t15" value="15" checked>
+                                                            <label class="btn btn-outline-dark rounded-pill w-100 px-4 py-3 border-2" for="t15">15 sec</label>
                                                         </div>
                                                         <div class="col-4">
-                                                            <button type="button" class="timer-btn btn rounded-pill w-100 px-4 py-3 border border-dark border-2" data-timer="30">30 sec</button>
+                                                            <input type="radio" class="btn-check" name="time-limit" id="t30" value="30">
+                                                            <label class="btn btn-outline-dark rounded-pill w-100 px-4 py-3 border-2" for="t30">30 sec</label>
                                                         </div>
                                                         <div class="col-4">
-                                                            <button type="button" class="timer-btn btn rounded-pill w-100 px-4 py-3 border border-dark border-2" data-timer="45">45 sec</button>
+                                                            <input type="radio" class="btn-check" name="time-limit" id="t45" value="45">
+                                                            <label class="btn btn-outline-dark rounded-pill w-100 px-4 py-3 border-2" for="t45">45 sec</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -131,14 +134,6 @@
             presetOptions.style.display = isPreset ? 'block' : 'none';
             randomSettings.style.display = isPreset ? 'none' : 'flex';
         }
-
-        timerButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                timerButtons.forEach(btn => btn.classList.remove('selected'));
-                button.classList.add('selected');
-            });
-        });
 
         randomRadio.addEventListener('change', updatePresetVisibility);
         presetRadio.addEventListener('change', updatePresetVisibility);

@@ -9,6 +9,9 @@ class Room(db.Model):
     room_code = db.Column(db.String(4), unique=True, nullable=False)
     is_active = db.Column(db.Boolean, default=True)
     host_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    question_count = db.Column(db.Integer, default=10)
+    difficulty = db.Column(db.String(10), default='Medium')
+    time_limit = db.Column(db.Integer, default=15)
 
     @staticmethod
     def generate_code():

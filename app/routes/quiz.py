@@ -49,12 +49,20 @@ def check_answer():
 @quiz_bp.route('/create-game', methods=['GET', 'POST'])
 @login_required
 def create_game():
+    question_count = request.form.get('question-count')
+    time_limit = request.form.get('time-limit')
+    difficulty = request.form.get('difficulty')
+
     print("Button clicked, creating game...") # Debug log
     code = Room.generate_code()
     if not code:
         return jsonify({"error": "Server is full, please try again later."}), 503
     
-    new_room = Room(room_code=code, host_id=current_user.id)
+    new_room = Room(room_code=code, 
+                    host_id=current_user.id,
+                    question_count=int(question_count),
+                    time_limit=int(time_limit),
+                    difficulty=str(difficulty))
     db.session.add(new_room)
     db.session.commit()
     return redirect(url_for('quiz.game_room', room_code=code))

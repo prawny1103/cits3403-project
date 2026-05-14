@@ -913,3 +913,82 @@
         font-size: 1.2rem;
     }
 }
+
+/* responsive fixes for login and register pages */
+@media (max-width: 768px) {
+    #login-page,
+    #signup-page {
+        min-height: 100vh;
+        height: auto;
+        padding: 2rem 1rem;
+        overflow-x: hidden;
+    }
+
+    .login-block,
+    .signup-block {
+        width: 92%;
+        max-width: 420px;
+        height: auto;
+        min-height: auto;
+        padding: 1.5rem 0;
+    }
+
+    .login-wrapper,
+    .signup-wrapper {
+        width: 90%;
+        height: auto;
+    }
+
+    .login-wrapper {
+        padding-top: 1rem;
+    }
+
+    .login-wrapper form,
+    .signup-block form {
+        width: 100%;
+    }
+
+    .login-block h1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+        text-align: center;
+        line-height: 1.1;
+    }
+
+    .signup-create-your-account-head {
+        font-size: clamp(2rem, 10vw, 3rem);
+        text-align: center;
+        line-height: 1.1;
+    }
+
+    .signup-join-name {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .login-form-group,
+    .signup-form-group {
+        width: 100%;
+    }
+
+    #login-username,
+    #login-password,
+    #signup-username,
+    #signup-password,
+    #signup-password-confirm {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+
+    #login-button,
+    #signup-button {
+        width: 100%;
+        font-size: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .login-bottom-text,
+    .signup-already-got-account-text {
+        text-align: center;
+        font-size: 0.85rem;
+    }
+}

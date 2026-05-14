@@ -992,3 +992,54 @@
         font-size: 0.85rem;
     }
 }
+
+/* additional responsive fixes for login and register form overflow */
+@media (max-width: 768px) {
+    #login-page,
+    #signup-page {
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .login-block,
+    .signup-block {
+        width: min(92%, 420px);
+        height: auto;
+        min-height: fit-content;
+        padding: 1.5rem 0;
+    }
+
+    .login-wrapper,
+    .signup-wrapper {
+        height: auto;
+        min-height: fit-content;
+    }
+
+    .login-block h1,
+    .signup-create-your-account-head {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+        line-height: 1.1;
+        word-break: normal;
+    }
+
+    .login-form-group,
+    .signup-form-group {
+        margin-top: 0.8rem;
+    }
+
+    #login-button,
+    #signup-button {
+        color: black;
+        display: block;
+        margin-top: 1.5rem;
+    }
+
+    .login-bottom-text,
+    .signup-already-got-account-text,
+    .signup-block form p {
+        color: black;
+        opacity: 1;
+    }
+}

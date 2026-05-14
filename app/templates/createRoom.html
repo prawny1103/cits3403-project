@@ -53,7 +53,7 @@
                         <div id="preset-options" class="mt-4 d-none">
                             <div class="preset-setting">
                                 <label class="form-label fw-bold">Choose preset quiz</label>
-                                <select id="preset-select" name="presetQuiz" class="form-select">
+                                <select id="preset-select" name="preset-select" class="form-select">
                                     <option value="general">General knowledge</option>
                                     <option value="science">Science and nature</option>
                                     <option value="history">History</option>
@@ -65,7 +65,7 @@
                         <div id="random-settings" class="d-flex justify-content-between mt-4">
                             <div class="random-setting">
                                 <label class="form-label fw-bold">No. of questions</label>
-                                <select id="question-count" name="questionCount" class="form-select">
+                                <select id="question-count" name="question-count" class="form-select">
                                     <option value="5">5</option>
                                     <option selected value="10">10</option>
                                     <option value="15">15</option>
@@ -90,10 +90,23 @@
                         
                         <input type="hidden" name="timer" id="timer-value" value="15">
                         
-                        <div class="timers d-flex justify-content-around gap-3 mb-4">
-                            <button type="button" class="timer-btn selected" data-timer="15">15 sec</button>
+                        <div class="timers d-flex justify-content-around mb-3">
+                            <div class="timer-options">
+                                <input type="radio" id="t15" class="selected" name="time-limit" value="15" checked>
+                                <label class="" for="t15">15 sec</label>
+                            </div>
+                            <div class="timer-options">
+                                <input type="radio" id="t30" class="btn-check1" name="time-limit" value="30">
+                                <label class="" for="t30">30 sec</label>
+                            </div>
+                            <div class="timer-options">
+                                <input type="radio" id="t45" class="btn-check1" name="time-limit" value="45">
+                                <label class="" for="t45">45 sec</label>
+                            </div>
+
+                            <!-- <button type="button" class="timer-btn selected" data-timer="15">15 sec</button>
                             <button type="button" class="timer-btn" data-timer="30">30 sec</button>
-                            <button type="button" class="timer-btn" data-timer="45">45 sec</button>
+                            <button type="button" class="timer-btn" data-timer="45">45 sec</button> -->
                         </div>
                     </div>
                     
@@ -113,9 +126,6 @@
         const presetOptions = document.getElementById('preset-options');
         const randomSettings = document.getElementById('random-settings');
 
-        const timerButtons = document.querySelectorAll('.timer-btn');
-        const timerValue = document.getElementById('timer-value');
-
         function updatePresetVisibility() {
             if (presetRadio.checked) {
                 presetOptions.classList.remove('d-none');
@@ -125,17 +135,6 @@
                 randomSettings.classList.remove('d-none');
             }
         }
-
-        timerButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                timerButtons.forEach(btn => {
-                    btn.classList.remove('selected');
-                });
-                button.classList.add('selected');
-                timerValue.value = button.dataset.timer;
-            });
-        });
 
         randomRadio.addEventListener('change', updatePresetVisibility);
         presetRadio.addEventListener('change', updatePresetVisibility);

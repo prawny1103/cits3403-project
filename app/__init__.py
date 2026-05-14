@@ -24,6 +24,7 @@ def create_app():
 
     with app.app_context():
         from . import socket_events
+        socket_events.init_app(app)
         db.create_all()
         if Question.query.count() == 0:
             sample_questions = [

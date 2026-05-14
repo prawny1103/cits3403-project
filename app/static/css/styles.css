@@ -430,3 +430,37 @@
 .screen.active {
     display: block;
 }
+
+#display-code {
+    /* color: #808080; */
+    letter-spacing: 0.15em;
+    font-family: 'Inter', sans-serif;
+}
+
+#start-game {
+    color: black;
+    background-color: rgb(65, 208, 82);
+    font-size: 1.6rem;
+    width: 30%;
+    transition: 0.2s;
+    
+}
+
+#start-game:hover {
+    color: black;
+}
+
+#room-code-display {
+    text-align: center;
+}
+
+.players-label {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+#player-list {
+    text-align: center;
+    margin: 0.5rem auto;
+}

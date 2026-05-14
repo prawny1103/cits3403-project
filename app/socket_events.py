@@ -64,7 +64,7 @@ def handle_start(data):
         'questions': [q.id for q in questions],
         'time_limit': room.time_limit,
         'current': 0,
-        'scores': {},
+        'scores': {player: 0 for player in active_players.get(room_code, [])}, # initialize scores for all players in the room
         'answered': {},
         'question_start_time': 0,
         'advance_timer': None,

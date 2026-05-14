@@ -1157,3 +1157,39 @@
         font-size: 1.4rem;
     }
 }
+
+/* responsive fixes for join room on tablet and short screens */
+@media (min-width: 769px) and (max-width: 1200px) {
+    #joinRoom-page {
+        overflow-x: hidden;
+    }
+
+    #joinRoom-body {
+        overflow-x: hidden;
+        padding: 2rem 1rem;
+    }
+
+    .joinRoom-container {
+        width: 70%;
+        height: auto;
+    }
+
+    .joinRoom-description h3 {
+        font-size: 2.6rem;
+        text-align: center;
+    }
+
+    .joinRoom-description p {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .joinRoom-form {
+        width: 80%;
+    }
+
+    .joinRoom-form input,
+    .joinRoom-form button {
+        width: 100%;
+    }
+}

@@ -716,3 +716,76 @@
     height: 80px;
     width: 250px;
 }
+
+/* responsive fixes for landing page */
+@media (max-width: 768px) {
+    .landing-header {
+        height: auto;
+        min-height: 4rem;
+    }
+
+    #landing-body nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .login-nav-left-container,
+    .login-nav-right-container {
+        margin: 0.2rem;
+        padding: 0.2rem 0.5rem;
+        width: auto;
+    }
+
+    .login-nav-not-authenticated,
+    .login-nav-authenticated-logout {
+        font-size: 1rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    .login-nav-left-container img {
+        width: 1.6rem;
+    }
+
+    #landing-page-main {
+        height: auto;
+        min-height: 92vh;
+    }
+
+    .landing-container,
+    .landing-inner-container-width,
+    .landing-inner2-container-top {
+        width: 100%;
+        height: auto;
+    }
+
+    .landing-inner2-container-top {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 3rem 1rem;
+    }
+
+    .landing-inner3-container-left,
+    .landing-inner3-container-right {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        align-items: center;
+    }
+
+    .welcome-text-body {
+        font-size: 2.2rem;
+    }
+
+    .game-name-body {
+        font-size: 3.2rem;
+    }
+
+    #create-room-btn,
+    #join-room-btn {
+        width: 80%;
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+    }
+}

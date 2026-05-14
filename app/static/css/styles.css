@@ -852,3 +852,39 @@
         margin: 0.4rem 0;
     }
 }
+
+/* responsive fixes for landing navbar on smaller desktop widths */
+@media (max-width: 1400px) {
+    #landing-body {
+        overflow-x: hidden;
+    }
+
+    #landing-body nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .login-nav-left-container,
+    .login-nav-right-container {
+        width: auto;
+        margin: 0.25rem 0.5rem;
+        padding: 0.2rem 0.7rem;
+    }
+
+    .login-nav-right-container {
+        max-width: none;
+        gap: 0.5rem;
+    }
+
+    .login-nav-not-authenticated,
+    .login-nav-authenticated-logout {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        padding: 0.2rem 0.6rem;
+        white-space: nowrap;
+    }
+
+    .login-nav-left-container img {
+        width: clamp(1.5rem, 3vw, 2.2rem);
+    }
+}

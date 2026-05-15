@@ -80,7 +80,7 @@ def create_game():
             'amount': int(question_count) if question_count else 10,
             'type': 'multiple'
         }
-        if difficulty:
+        if difficulty and difficulty != "any":
             params['difficulty'] = difficulty
 
         try:

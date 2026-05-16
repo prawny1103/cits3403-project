@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, jsonify, url_for, redirec
 from flask_login import login_required, current_user
 import json
 from app.extensions import db
-from app.models.quiz import Question, Room
+from app.models.quiz import Quiz, Question, Room
 import random
 import requests
 
@@ -143,6 +143,3 @@ def game_room(room_code):
     
     return render_template('game.html', room_code=room_code, is_host=is_host)
 
-@quiz_bp.route('/test')
-def test():
-    return "Test route is working!"

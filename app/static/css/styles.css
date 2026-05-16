@@ -1073,10 +1073,815 @@
     width: 250px;
 }
 
+/* responsive fixes for landing page */
+@media (max-width: 768px) {
+    .landing-header {
+        height: auto;
+        min-height: 4rem;
+    }
+
+    #landing-body nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .login-nav-left-container,
+    .login-nav-right-container {
+        margin: 0.2rem;
+        padding: 0.2rem 0.5rem;
+        width: auto;
+    }
+
+    .login-nav-not-authenticated,
+    .login-nav-authenticated-logout {
+        font-size: 1rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    .login-nav-left-container img {
+        width: 1.6rem;
+    }
+
+    #landing-page-main {
+        height: auto;
+        min-height: 92vh;
+    }
+
+    .landing-container,
+    .landing-inner-container-width,
+    .landing-inner2-container-top {
+        width: 100%;
+        height: auto;
+    }
+
+    .landing-inner2-container-top {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 3rem 1rem;
+    }
+
+    .landing-inner3-container-left,
+    .landing-inner3-container-right {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        align-items: center;
+    }
+
+    .welcome-text-body {
+        font-size: 2.2rem;
+    }
+
+    .game-name-body {
+        font-size: 3.2rem;
+    }
+
+    #create-room-btn,
+    #join-room-btn {
+        width: 80%;
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+    }
+}
+
+/* responsive fixes for tablet landing page */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .landing-header {
+        height: auto;
+        min-height: 4.5rem;
+    }
+
+    #landing-body nav {
+        flex-wrap: wrap;
+        padding: 0.5rem 1rem;
+        gap: 0.5rem;
+    }
+
+    .login-nav-left-container,
+    .login-nav-right-container {
+        width: auto;
+        margin: 0.3rem 0.5rem;
+        padding: 0.2rem 0.7rem;
+    }
+
+    .login-nav-not-authenticated,
+    .login-nav-authenticated-logout {
+        font-size: 1.2rem;
+        padding: 0.2rem 0.6rem;
+    }
+
+    .login-nav-left-container img {
+        width: 1.8rem;
+    }
+
+    .landing-container {
+        width: 90%;
+        height: 100%;
+        justify-content: center;
+    }
+
+    .landing-inner-container-width {
+        width: 90%;
+        height: 70%;
+        justify-content: center;
+    }
+
+    .landing-inner2-container-top {
+        height: auto;
+        align-items: center;
+    }
+
+    .welcome-text-body {
+        font-size: 3rem;
+    }
+
+    .game-name-body {
+        font-size: 4.2rem;
+    }
+
+    #create-room-btn,
+    #join-room-btn {
+        width: 80%;
+        font-size: 1.2rem;
+        margin: 0.4rem 0;
+    }
+}
+
+/* responsive fixes for landing navbar on smaller desktop widths */
+@media (max-width: 1400px) {
+    #landing-body {
+        overflow-x: hidden;
+    }
+
+    #landing-body nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .login-nav-left-container,
+    .login-nav-right-container {
+        width: auto;
+        margin: 0.25rem 0.5rem;
+        padding: 0.2rem 0.7rem;
+    }
+
+    .login-nav-right-container {
+        max-width: none;
+        gap: 0.5rem;
+    }
+
+    .login-nav-not-authenticated,
+    .login-nav-authenticated-logout {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        padding: 0.2rem 0.6rem;
+        white-space: nowrap;
+    }
+
+    .login-nav-left-container img {
+        width: clamp(1.5rem, 3vw, 2.2rem);
+    }
+}
+
+/* responsive fixes for small laptop landing content */
+@media (min-width: 1025px) and (max-width: 1400px) {
+    .landing-container {
+        width: 90%;
+    }
+
+    .landing-inner-container-width {
+        width: 85%;
+    }
+
+    .welcome-text-body {
+        font-size: 3.2rem;
+    }
+
+    .game-name-body {
+        font-size: 4.5rem;
+    }
+
+    #create-room-btn,
+    #join-room-btn {
+        width: 75%;
+        font-size: 1.2rem;
+    }
+}
+
+/* responsive fixes for login and register pages */
+@media (max-width: 768px) {
+    #login-page,
+    #signup-page {
+        min-height: 100vh;
+        height: auto;
+        padding: 2rem 1rem;
+        overflow-x: hidden;
+    }
+
+    .login-block,
+    .signup-block {
+        width: 92%;
+        max-width: 420px;
+        height: auto;
+        min-height: auto;
+        padding: 1.5rem 0;
+    }
+
+    .login-wrapper,
+    .signup-wrapper {
+        width: 90%;
+        height: auto;
+    }
+
+    .login-wrapper {
+        padding-top: 1rem;
+    }
+
+    .login-wrapper form,
+    .signup-block form {
+        width: 100%;
+    }
+
+    .login-block h1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+        text-align: center;
+        line-height: 1.1;
+    }
+
+    .signup-create-your-account-head {
+        font-size: clamp(2rem, 10vw, 3rem);
+        text-align: center;
+        line-height: 1.1;
+    }
+
+    .signup-join-name {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .login-form-group,
+    .signup-form-group {
+        width: 100%;
+    }
+
+    #login-username,
+    #login-password,
+    #signup-username,
+    #signup-password,
+    #signup-password-confirm {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+
+    #login-button,
+    #signup-button {
+        width: 100%;
+        font-size: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .login-bottom-text,
+    .signup-already-got-account-text {
+        text-align: center;
+        font-size: 0.85rem;
+    }
+}
+
+/* additional responsive fixes for login and register form overflow */
+@media (max-width: 768px) {
+    #login-page,
+    #signup-page {
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .login-block,
+    .signup-block {
+        width: min(92%, 420px);
+        height: auto;
+        min-height: fit-content;
+        padding: 1.5rem 0;
+    }
+
+    .login-wrapper,
+    .signup-wrapper {
+        height: auto;
+        min-height: fit-content;
+    }
+
+    .login-block h1,
+    .signup-create-your-account-head {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+        line-height: 1.1;
+        word-break: normal;
+    }
+
+    .login-form-group,
+    .signup-form-group {
+        margin-top: 0.8rem;
+    }
+
+    #login-button,
+    #signup-button {
+        color: black;
+        display: block;
+        margin-top: 1.5rem;
+    }
+
+    .login-bottom-text,
+    .signup-already-got-account-text,
+    .signup-block form p {
+        color: black;
+        opacity: 1;
+    }
+}
+
+/* responsive fixes for login and register pages on short screens */
+@media (min-width: 769px) and (max-height: 850px) {
+    #login-page,
+    #signup-page {
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
+
+    .login-block,
+    .signup-block {
+        height: auto;
+        min-height: fit-content;
+        padding: 1.5rem 0;
+    }
+
+    .login-wrapper {
+        padding-top: 1.5rem;
+    }
+
+    .signup-join-name {
+        margin-top: 1rem;
+    }
+
+    .signup-create-your-account-head {
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.1;
+    }
+
+    #login-button,
+    #signup-button {
+        color: black;
+        margin-top: 1.5rem;
+    }
+
+    .login-bottom-text,
+    .signup-already-got-account-text,
+    .signup-block form p {
+        color: black;
+        opacity: 1;
+    }
+}
+
+/* responsive fixes for join room page */
+@media (max-width: 768px) {
+    #joinRoom-page {
+        min-height: 100vh;
+        height: auto;
+        overflow-x: hidden;
+    }
+
+    #joinRoom-page nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .joinRoom-nav-left-container a,
+    .joinRoom-nav-right-container h3 {
+        font-size: 1.2rem;
+        padding: 0.2rem 0.5rem;
+        text-align: center;
+    }
+
+    .joinRoom-nav-right-container {
+        margin: 0.2rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    #joinRoom-body {
+        height: auto;
+        min-height: 92vh;
+        padding: 2rem 1rem;
+        overflow-x: hidden;
+    }
+
+    .joinRoom-container {
+        width: 90%;
+        height: auto;
+    }
+
+    .joinRoom-description h3 {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+
+    .joinRoom-description p {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    .joinRoom-form {
+        width: 90%;
+        margin-top: 2rem;
+    }
+
+    .joinRoom-form label {
+        font-size: 1.2rem;
+    }
+
+    .joinRoom-form input {
+        width: 100%;
+        font-size: 1.5rem;
+        letter-spacing: 6px;
+    }
+
+    .joinRoom-form button {
+        width: 100%;
+        font-size: 1.4rem;
+    }
+}
+
+/* responsive fixes for join room on tablet and short screens */
+@media (min-width: 769px) and (max-width: 1200px) {
+    #joinRoom-page {
+        overflow-x: hidden;
+    }
+
+    #joinRoom-body {
+        overflow-x: hidden;
+        padding: 2rem 1rem;
+    }
+
+    .joinRoom-container {
+        width: 70%;
+        height: auto;
+    }
+
+    .joinRoom-description h3 {
+        font-size: 2.6rem;
+        text-align: center;
+    }
+
+    .joinRoom-description p {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .joinRoom-form {
+        width: 80%;
+    }
+
+    .joinRoom-form input,
+    .joinRoom-form button {
+        width: 100%;
+    }
+}
+
+/* responsive fixes for create room mobile layout */
+@media (max-width: 768px) {
+    #crtRoom-page {
+        min-height: 100vh;
+        height: auto;
+        overflow-x: hidden;
+    }
+
+    #crtRoom-page nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .crtRoom-nav-left-container a,
+    .crtRoom-nav-right-container h3 {
+        font-size: 1.2rem;
+        padding: 0.2rem 0.5rem;
+        text-align: center;
+    }
+
+    .crtRoom-nav-right-container {
+        margin: 0.2rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    #crtRoom-body {
+        height: auto;
+        min-height: 92vh;
+        padding: 2rem 1rem;
+        overflow-x: hidden;
+    }
+
+    .crtRoom-container {
+        width: 92%;
+        height: auto;
+    }
+
+    .crtRoom-description h3 {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+
+    .crtRoom-description p {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .crtRoom-settings,
+    .crtRoom-timer,
+    .crtRoom-form,
+    .crtRoom-question-settings {
+        width: 100%;
+        height: auto;
+    }
+
+    .crtRoom-question-settings {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.2rem;
+    }
+
+    .crtRoom-question-settings h3,
+    .crtRoom-timer h3 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .crtRoom-type-buttons,
+    .crtRoom-timer-buttons {
+        flex-direction: column;
+        gap: 0.7rem;
+        width: 100%;
+    }
+
+    .crtRoom-type-buttons button,
+    .crtRoom-timer-buttons button,
+    #host-room-btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+
+    .crtRoom-select-row {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .crtRoom-select-group {
+        width: 100%;
+    }
+
+    .crtRoom-select-group label {
+        font-size: 1rem;
+    }
+
+    .crtRoom-select-group select {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    #host-room-btn {
+        margin-top: 1.5rem;
+    }
+}
+ 
+/* responsive fixes for create room tablet and short screen layout */
+@media (min-width: 769px) and (max-width: 1200px), (max-height: 700px) {
+    #crtRoom-page {
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    #crtRoom-body {
+        height: auto;
+        min-height: 92vh;
+        padding: 2rem 1rem;
+        overflow-x: hidden;
+    }
+
+    .crtRoom-container {
+        width: 80%;
+        height: auto;
+    }
+
+    .crtRoom-description h3 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        text-align: center;
+    }
+
+    .crtRoom-description p {
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .crtRoom-question-settings,
+    .crtRoom-timer {
+        width: 80%;
+        height: auto;
+        padding: 1.5rem;
+    }
+
+    .crtRoom-type-buttons,
+    .crtRoom-timer-buttons {
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .crtRoom-type-buttons button,
+    .crtRoom-timer-buttons button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+
+    .crtRoom-select-row {
+        gap: 1rem;
+    }
+
+    .crtRoom-select-group select {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    #host-room-btn {
+        width: 80%;
+        font-size: 1rem;
+        margin-top: 1.5rem;
+    }
+}
+
+/* fix create room select layout alignment */
+.crtRoom-qType-container {
+    height: auto;
+    min-height: fit-content;
+    overflow: visible;
+}
+
+#random-settings {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.random-setting {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.random-setting label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.random-setting select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.crtRoom-timer-container {
+    margin-top: 2rem;
+    height: auto;
+    min-height: fit-content;
+}
 .btn-correct {
     background-color: green !important;
 }
 
 .btn-incorrect {
     background-color: red !important;
+}
+
+/* =========================
+   Game page responsive fix
+========================= */
+
+@media (max-width: 1100px) {
+
+    /* Lobby Screen */
+
+    .game-lobby-container {
+        width: 70%;
+    }
+
+    #display-code {
+        font-size: 4rem;
+        letter-spacing: 1rem;
+        transform: none;
+    }
+
+    .players-container {
+        width: 100%;
+    }
+
+    #start-game {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+
+
+    /* Question Screen */
+
+    .question-screen-container {
+        width: 90%;
+        padding: 1.5rem;
+        min-height: auto;
+    }
+
+    .q-meta {
+        gap: 1rem;
+    }
+
+    #timer-label {
+        font-size: 3rem;
+    }
+
+    #question-text {
+        font-size: 1.3rem;
+    }
+
+    #choices-grid {
+        gap: 15px;
+        row-gap: 15px;
+    }
+
+    #choices-grid .choice-btn {
+        font-size: 1.2rem;
+        height: 70px;
+    }
+
+
+    /* Game Over Screen */
+
+    .gameover-container {
+        width: 70%;
+        height: auto;
+    }
+
+    .gameover-container h1 {
+        font-size: 3rem;
+        text-align: center;
+        padding: 0 0 1rem 0;
+    }
+
+    .gameover-container p {
+        font-size: 1.5rem;
+    }
+
+    .gameover-standings-container {
+        min-height: 300px;
+        max-height: 300px;
+    }
+
+    .score-row {
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+    }
+
+    .gameover-container a {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* Short-height window support */
+
+@media (max-height: 700px) {
+
+    .question-screen-container {
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    #question-text {
+        font-size: 1.2rem;
+    }
+
+    #choices-grid {
+        gap: 10px;
+    }
+
+    #choices-grid .choice-btn {
+        height: 65px;
+    }
+
 }

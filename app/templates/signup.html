@@ -20,7 +20,14 @@
                 <form method="POST" action="{{url_for('auth.signup')}}">
                     <div class="signup-form-group">
                         <label for="signup-username">Username <span>*</span></label>
-                        <input type="text" id="signup-username"  class="form-control" name="username" required placeholder="JohnDoe123">
+                        <input type="text"
+                               id="signup-username" 
+                               class="form-control" 
+                               name="username" 
+                               placeholder="JohnDoe123"
+                               minlength="3"
+                               required 
+                               >
                     </div>
                     
                     <div class="signup-form-group">

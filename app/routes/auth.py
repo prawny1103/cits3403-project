@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, current_user
 from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
+import re 
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -11,6 +12,22 @@ def signup():
         username = request.form.get('username')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
+
+        # Username Validation
+        # if no username entered
+        if not username:
+            flash('Username is required')
+            return redirect(url_for('auth.signup'))
+
+        # cap username length
+        if len(username) < 3 or len(username) > 10:
+            flash('Username must be between 3 and 10 characters')
+            return redirect(url_for('auth.signup'))
+
+        # no odd symbol for username *** fix this... 
+        if not re.match(r'^[A-Za-z0-9_]+$', username):
+            flash('Username can only contain letters, numbers, and underscores')
+            return redirect(url_for('auth.signup'))
 
         if password != confirm_password:
             flash('Passwords do not match')

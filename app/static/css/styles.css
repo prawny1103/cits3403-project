@@ -678,7 +678,7 @@
     width: 100%;
     width: 80%;
     border-radius: 20px;
-    background-color: rgb(0, 0, 0, 0.1);
+    background-color: rgb(40, 40, 40);
 }
 
 .joinRoom-form label {

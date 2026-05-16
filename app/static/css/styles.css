@@ -725,7 +725,6 @@
 }
 
 #lobby-screen {
-    border: 1px solid green;
     color: white;
     height: 100%;
     width: 100%;
@@ -788,11 +787,9 @@
     border-radius: 10px;
     color: black;
     list-style: none;
-    overflow-y: scroll;
-    min-height: 250px;
-    max-height: 60%;
+    overflow-y: auto;
+    height: 250px;
     padding-left: 0;
-    scrollbar-gutter: stable;
 }
 
 #player-list li {
@@ -816,10 +813,19 @@
     border-radius: 10px;
 }
 
+#player-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+#player-list::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 40px;
+}
+
 .players-container {
     width: 70%;
     background-color: rgb(255, 255, 255, 0.1);
     border-radius: 25px;
+    height: 350px;
 }
 
 .waiting-msg {
@@ -870,8 +876,9 @@
 
 #timer-label {
     font-weight: bold;
-    font-size: 4rem;
+    font-size: 3rem;
     color: red;
+    padding: 15px;
 }
 
 #question-text {
@@ -949,13 +956,16 @@
     border-radius: 5px;
     margin: 0.5rem 0;
     width: 90%;
-    text-align: center;
     font-size: 1.7rem;
     background-color: white;
     color: black;
     padding: 0.3rem 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.score-num-name {
+    padding-left: 2rem;
 }
 
 .score-row.gold {
@@ -981,6 +991,21 @@
 .score-pts {
     font-weight: bold;
     letter-spacing: 0.2rem;
+    padding-right: 2rem;
+    width: 25%;
+}
+
+#scores-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+#scores-list::-webkit-scrollbar-track {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+#scores-list::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 10px;
 }
 
 /* scores screen end */

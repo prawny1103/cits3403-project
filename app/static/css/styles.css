@@ -351,15 +351,13 @@
 }
 
 .login-wrapper a,
-.signup-to-login-link,
-.signup-block form p a {
+.signup-to-login-link {
     text-decoration: underline;
     color: black;
 }
 
 .login-wrapper a:hover,
-.signup-to-login-link:hover,
-.signup-block form p a:hover {
+.signup-to-login-link:hover {
     color: red;
     transition: 0.2s;
 }
@@ -375,11 +373,6 @@
     margin: 1rem 0 1rem 0;
 }
 
-.signup-block form p {
-    font-size: 0.8rem;
-    margin-left: 0.3rem;
-}
-
 .signup-form-group span,
 .login-form-group span {
     color: red;
@@ -387,6 +380,35 @@
 
 .signup-already-got-account-text {
     font-size: 0.8rem;
+}
+
+.signup-message-area {
+    height: 50px;
+    width: 100%;
+}
+
+.signup-password-criteria,
+.signup-login-flash {
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+    transition: opacity 0.5s ease;
+}
+
+.signup-login-flash {
+    color: red;
+    width: 100%;
+}
+
+.signup-password-criteria {
+    opacity: 1;
+}
+
+.signup-login-flash.fade-out{
+    opacity: 0;
+}
+
+.signup-password-criteria.hidden {
+    opacity: 0; 
 }
 
 /* login and signup page end */ 

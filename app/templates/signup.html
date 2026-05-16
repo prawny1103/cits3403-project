@@ -39,20 +39,22 @@
                         <label for="signup-password-confirm"> Confirm Password <span>*</span></label>
                         <input type="password" id="signup-password-confirm"  class="form-control" name="confirm_password" required placeholder="Confirm Password">
                     </div>
-                    <p>Password must be at least 5 characters including ONE number and ONE uppercase character. </p>
 
-                    <!-- Re-check this -->
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            <div class="alert alert-danger mt-3" role="alert">
-                                {{ messages[0] }}
-                            </div>
-                        {% endif %}
-                    {% endwith %}
+                    <div class="signup-message-area">
+                        <!-- Re-check this -->
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="signup-login-flash" id="signup-flash">
+                                    {{ messages[0] }}
+                                </div>
+                            {% endif %}
+                                <p id="signup-criteria" class="signup-password-criteria {% if messages %} hidden {% endif %}">Password must be at least 5 characters including ONE number and ONE uppercase character. </p>
+                        {% endwith %}
+                    </div>
                     <button id="signup-button" class="btn" type="submit">Join Now</button>
                 </form>
                 
-                <p class="signup-already-got-account-text">
+                <p class="signup-already-got-account-text" >
                     Already have an account? 
                     <a class="signup-to-login-link" href="{{ url_for('auth.login') }}">Log in here</a>
                 </p>
@@ -61,5 +63,23 @@
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        const flash = document.getElementById('signup-flash')
+        const criteria = document.getElementById('signup-criteria')
+
+        if (flash) {
+            setTimeout(() => {
+                flash.classList.add('fade-out');
+                
+                    setTimeout(() => {
+                        flash.remove();
+                        criteria.classList.remove('hidden')
+                    }, 500);
+
+                }, 5000);
+            }
+
+    </script>
+
 </body>
 </html>

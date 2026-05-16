@@ -11,7 +11,8 @@
 #signup-page, 
 #login-page,
 #crtRoom-page,
-#joinRoom-page {
+#joinRoom-page,
+#game-page {
     background-color: rgb(28, 28, 28);
 } 
 
@@ -19,7 +20,8 @@
 #signup-page,
 #landing-body,
 #crtRoom-page,
-#joinRoom-page {
+#joinRoom-page,
+#game-page {
     height: 100vh;
 }
 
@@ -439,7 +441,6 @@
     border-radius: 25px;
 }
 
-
 .crtRoom-container h2, 
 .crtRoom-container p {
     color: white;
@@ -687,28 +688,332 @@
 
 /* joinRoom page end */
 /*-----------------------------------------------------*/
-/*-----------------------------------------------------*/
+
 
 /*-----------------------------------------------------*/
-
-.btn-correct {
-    background-color: green !important;
+/* game page */
+/* lobby */
+#game-page {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
 }
 
-.btn-incorrect {
-    background-color: red !important;
+#lobby-screen {
+    border: 1px solid green;
+    color: white;
+    height: 100%;
+    width: 100%;
 }
 
-/* Timer button styles */
-.timer-btn {
-    background-color: #77c1f2;
+.game-lobby-container {
+    height: 100%;
+    width: 40%;
+}
+
+.screen {
+    position: absolute;
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+#room-code-display {
+    font-size: 2rem;
+}
+
+#display-code {
+    letter-spacing: 2rem;
+    transform: translateX(1rem);
+    font-size: 5rem;
+    color: rgb(65, 208, 82);
+}
+
+#start-game {
     color: black;
+    background-color: rgb(65, 208, 82);
+    font-size: 1.7rem;
+    width: 70%;
+    transition: 0.2s;
+    border: none;
+    border-radius: 10px;
+    padding: 0.3rem 0;
 }
 
-.timer-btn.selected {
-    background-color: #1f4a7d;
+#start-game:hover {
+    background-color: white;
+}
+
+.players-label {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+#player-list {
+    text-align: center;
+    margin: 0.5rem auto;
+    width: 90%;
+    border-radius: 10px;
+    color: black;
+    list-style: none;
+    overflow-y: scroll;
+    min-height: 250px;
+    max-height: 60%;
+    padding-left: 0;
+    scrollbar-gutter: stable;
+}
+
+#player-list li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    height: 19%;
+    width: 90%;
+    text-align: center;
+    margin: 1rem auto;
+    border-radius: 8px;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+}
+
+#player-list::-webkit-scrollbar {
+    background-color: white;
+    width: 5px; 
+    border-radius: 10px;
+}
+
+.players-container {
+    width: 70%;
+    background-color: rgb(255, 255, 255, 0.1);
+    border-radius: 25px;
+}
+
+.waiting-msg {
+    font-size: 1.2rem;
+}
+
+/* lobby */ 
+/* countdown-screen */
+#countdown-screen {
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#countdown-number  {
+    color: rgb(65, 208, 82);
+    font-size: 15rem;
+}
+
+#countdown-label {
+    font-size: 5rem;
     color: white;
 }
+/* countdown-screen end */
+
+/* question screen */
+
+.question-screen-container {
+    border-radius: 15px;
+    background-color: rgb(40, 40, 40);
+    width: 70%;
+    max-width: 1200px;
+    min-height: 600px;
+
+    padding: 2rem;
+}
+
+.q-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#q-progress, #timer-label {
+    font-size: 2rem;
+    color: white;
+    margin: 1rem;
+}
+
+#timer-label {
+    font-weight: bold;
+    font-size: 4rem;
+    color: red;
+}
+
+#question-text {
+    border-top: 4px solid white;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    min-height: 50px;
+}
+
+#choices-grid {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 220px;
+    gap: 20px;
+    row-gap: 20px;
+    /* create 2x2 grid with equal sizes */
+    grid-template-rows: repeat(2, 80px);
+    grid-template-columns: repeat(2, 49%);
+    border-bottom: 4px solid white;
+}
+
+/* change to .choice-btn tmr */
+#choices-grid .choice-btn {
+    background-color: rgb(65, 208, 82);
+    color: black;
+    border: none;
+    width: 100%;
+    height: 80px;
+    border-radius: 15px;
+    font-size: 1.5rem;
+    transition: 0.2s;
+}
+
+#choices-grid .choice-btn:hover {
+    background-color: rgb(65, 208, 82, 0.6);
+}
+
+#feedback-bar {
+    font-size: 1.5rem;
+    padding: 1rem;
+    color: red;
+}
+
+/* question screen end */
+
+/* scores screen  */
+
+.scores-screen-container {
+    height: 60vh;
+    color: white;
+}
+
+.scores-screen-container h2 {
+    font-size: 4rem;
+    border-bottom: 4px solid rgb(65, 208, 82);
+    padding: 0 3rem 1rem 3rem;
+}
+
+#scores-list {
+    min-height: 500px;
+    overflow-y: auto;
+    max-height: 500px;
+    background-color: rgb(40, 40, 40);
+    border-radius: 6px;
+}
+
+.label{
+    font-weight: bold;
+}
+
+.score-row {
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    width: 90%;
+    text-align: center;
+    font-size: 1.7rem;
+    background-color: white;
+    color: black;
+    padding: 0.3rem 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.score-row.gold {
+    background-color: gold;
+}
+
+.score-row.silver {
+    background-color: silver;
+}
+
+.score-row.bronze {
+    background-color: #cd7f32;
+}
+
+.score-rank {
+    font-weight: bold;
+}
+
+.score-name {
+    letter-spacing: 0.2rem;
+}
+
+.score-pts {
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+}
+
+/* scores screen end */
+
+/* gameover screen  */
+#gameover-screen {
+    height: 100vh;
+}
+
+#final-scores {
+    width: 100%;
+}
+
+.gameover-container {
+    color: white;
+    width: 25%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gameover-standings-container {
+    background-color: rgb(40, 40, 40);
+    width: 100%;
+    min-height: 500px; 
+    max-height: 500px;   
+    border-radius: 6px;
+    overflow-y: auto;
+}
+
+.gameover-container h1 {
+    font-size: 4rem;
+    border-bottom: 4px solid rgb(65, 208, 82);
+    padding: 0 3rem 1rem 3rem;
+}
+
+.gameover-container p{
+    font-size: 2rem;
+}
+
+.gameover-container a {
+    color: black;
+    background-color: rgb(65, 208, 82);
+    width: 100%;
+    font-size: 1.5rem;
+    transition: 0.2s;
+}
+
+.gameover-container a:hover{
+    background-color: black;
+    color: white;
+}
+
+/* gameover screen end */
+/* game page end */ 
+/*-----------------------------------------------------*/
 
 #answer-multi {
     display: grid;
@@ -1424,70 +1729,4 @@
 
 .btn-incorrect {
     background-color: red !important;
-}
-
-/* Timer button styles */
-/* .timer-btn {
-    background-color: #77c1f2;
-    color: black;
-}
-
-.timer-btn.selected {
-    background-color: #1f4a7d;
-    color: white;
-} */
-
-
-/* Game */
-.screen {
-    display: none;
-}
-
-.screen.active {
-    display: block;
-}
-
-#display-code {
-    /* color: #808080; */
-    letter-spacing: 0.15em;
-    font-family: 'Inter', sans-serif;
-}
-
-#start-game {
-    color: black;
-    background-color: rgb(65, 208, 82);
-    font-size: 1.6rem;
-    width: 30%;
-    transition: 0.2s;
-    
-}
-
-#start-game:hover {
-    color: black;
-}
-
-#room-code-display {
-    text-align: center;
-}
-
-.players-label {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1.5rem;
-}
-
-#player-list {
-    text-align: center;
-    margin: 0.5rem auto;
-}
-
-#choices-grid{
-    display: grid;
-    justify-content: center;
-    padding-bottom: 80px;
-    gap: 210px;
-    row-gap: 50px;
-    /* create 2x2 grid with equal sizes */
-    grid-template-rows: repeat(2, 80px);
-    grid-template-columns: repeat(2, 250px);
 }

@@ -6,3 +6,4 @@ Flask-socketio
 Werkzeug
 python-dotenv
 email-validator
+requests

@@ -36,7 +36,6 @@
                                     {{ messages[0] }}
                                 </div>
                             {% endif %}
-                                <a id="login-forgotPass" class="login-forgotPass {% if messages %} hidden {% endif %}"   href="#">Forgot Password</a>
                         {% endwith %}
                     </div>
 
@@ -54,16 +53,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
         const flash = document.getElementById('login-flash')
-        const forgotPass = document.getElementById('login-forgotPass')
 
-        if (flash && forgotPass) {
+        if (flash) {
             setTimeout(() => {
                 flash.classList.add('fade-out');
-
-                setTimeout(() => {
-                    flash.remove();
-                    forgotPass.classList.remove('hidden')
-                }, 500)
 
             }, 5000);
         }

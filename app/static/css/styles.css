@@ -397,13 +397,11 @@
     padding-left: 0.4rem;
 }
 
-.login-flash, 
-.login-forgotPass {
+.login-flash {
     transition: opacity 0.5s ease;
 }
 
-.signup-password-criteria,
-.login-forgotPass {
+.signup-password-criteria {
     opacity: 1;
 }
 
@@ -412,17 +410,9 @@
     opacity: 0;
 }
 
-.signup-password-criteria.hidden,
-.login-forgotPass.hidden {
+.signup-password-criteria.hidden {
     opacity: 0; 
 }
-
-.login-forgotPass {
-    width: 100%;
-    text-align: right;
-    text-decoration: underline;
-}
-
 
 /* login and signup page end */ 
 /*-----------------------------------------------------*/

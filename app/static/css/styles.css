@@ -344,12 +344,6 @@
     transition: 0.2s;
 }
 
-.login-forgotPass {
-    width: 100%;
-    text-align: right;
-    text-decoration: underline;
-}
-
 .login-wrapper a,
 .signup-to-login-link {
     text-decoration: underline;
@@ -382,7 +376,8 @@
     font-size: 0.8rem;
 }
 
-.signup-message-area {
+.signup-message-area,
+.login-message-area {
     height: 50px;
     width: 100%;
 }
@@ -394,22 +389,43 @@
     transition: opacity 0.5s ease;
 }
 
-.signup-login-flash {
+.signup-login-flash,
+.login-flash {
     color: red;
     width: 100%;
 }
 
-.signup-password-criteria {
+.login-flash {
+    font-size: 1rem;
+    padding-left: 0.4rem;
+}
+
+.login-flash, 
+.login-forgotPass {
+    transition: opacity 0.5s ease;
+}
+
+.signup-password-criteria,
+.login-forgotPass {
     opacity: 1;
 }
 
-.signup-login-flash.fade-out{
+.signup-login-flash.fade-out, 
+.login-flash.fade-out{
     opacity: 0;
 }
 
-.signup-password-criteria.hidden {
+.signup-password-criteria.hidden,
+.login-forgotPass.hidden {
     opacity: 0; 
 }
+
+.login-forgotPass {
+    width: 100%;
+    text-align: right;
+    text-decoration: underline;
+}
+
 
 /* login and signup page end */ 
 /*-----------------------------------------------------*/

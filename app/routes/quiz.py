@@ -54,8 +54,8 @@ def create_game():
     question_count = request.form.get('question-count')
     time_limit = request.form.get('time-limit')
     difficulty = request.form.get('difficulty')
-    quiz_type = request.form.get('quizType') # Random or Preset
-    preset_category = request.form.get('preset-select') # e.g. "Science", "History" (only used if quiz_type is Preset)
+    quiz_type = request.form.get('quizType') 
+    preset_quiz_id = request.form.get('preset-quiz-id')
 
     print("Button clicked, creating game...") # Debug log
     code = Room.generate_code()
@@ -68,8 +68,8 @@ def create_game():
         question_count=int(question_count) if question_count else 10,
         time_limit=int(time_limit) if time_limit else 15,
         difficulty=str(difficulty) if difficulty else 'Any',
-        quiz_type = quiz_type or 'random',
-        preset_category = preset_category if quiz_type == 'preset' else None,
+        quiz_type=quiz_type or 'random',
+        quiz_id=int(preset_quiz_id) if quiz_type == 'preset' and preset_quiz_id else None,
     )
     
     db.session.add(new_room)
@@ -143,3 +143,68 @@ def game_room(room_code):
     
     return render_template('game.html', room_code=room_code, is_host=is_host)
 
+@quiz_bp.route('/my-quizzes')
+@login_required
+def my_quizzes():
+    user_quizzes = Quiz.query.filter_by(creator_id=current_user.id).all()
+    public_quizzes = Quiz.query.filter_by(is_published=True).filter(Quiz.creator_id != current_user.id).all()
+
+    return render_template('myQuizzes.html', user_quizzes=user_quizzes, public_quizzes=public_quizzes)
+
+@quiz_bp.route('/quiz/new', methods=['GET', 'POST'])
+@login_required
+def create_quiz():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        
+        new_quiz = Quiz(title=title, description=description, creator_id=current_user.id)
+        db.session.add(new_quiz)
+        db.session.commit()
+        
+        flash("Quiz created! Now add some questions.")
+        return redirect(url_for('quiz.edit_quiz', quiz_id=new_quiz.id))
+    
+    return render_template('editQuiz.html', quiz=None)
+
+@quiz_bp.route('/quiz/<int:quiz_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_quiz(quiz_id):
+    quiz = db.session.get(Quiz, quiz_id)
+    if not quiz or quiz.creator_id != current_user.id:
+        flash("Unauthorized or Quiz not found.")
+        return redirect(url_for('quiz.my_quizzes'))
+
+    if request.method == 'POST':
+        question_text = request.form.get('question_text')
+        correct_answer = request.form.get('correct_answer')
+
+        choices = {
+            'A': request.form.get('choice_a'),
+            'B': request.form.get('choice_b'),
+            'C': request.form.get('choice_c'),
+            'D': request.form.get('choice_d')
+        }
+        
+        new_q = Question(
+            quiz_id=quiz.id,
+            text=question_text,
+            correct_answer=correct_answer,
+            choices=json.dumps(choices)
+        )
+        db.session.add(new_q)
+        db.session.commit()
+        flash("Question added!")
+
+    return render_template('editQuiz.html', quiz=quiz)
+
+@quiz_bp.route('/quiz/<int:quiz_id>/publish', methods=['POST'])
+@login_required
+def publish_quiz(quiz_id):
+    quiz = db.session.get(Quiz, quiz_id)
+    if quiz and quiz.creator_id == current_user.id:
+        quiz.is_published = True
+        db.session.commit()
+        flash("Quiz published successfully!")
+        
+    return redirect(url_for('quiz.my_quizzes'))

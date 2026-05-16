@@ -1730,3 +1730,120 @@
 .btn-incorrect {
     background-color: red !important;
 }
+
+/* =========================
+   Game page responsive fix
+========================= */
+
+@media (max-width: 1100px) {
+
+    /* Lobby Screen */
+
+    .game-lobby-container {
+        width: 70%;
+    }
+
+    #display-code {
+        font-size: 4rem;
+        letter-spacing: 1rem;
+        transform: none;
+    }
+
+    .players-container {
+        width: 100%;
+    }
+
+    #start-game {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+
+
+    /* Question Screen */
+
+    .question-screen-container {
+        width: 90%;
+        padding: 1.5rem;
+        min-height: auto;
+    }
+
+    .q-meta {
+        gap: 1rem;
+    }
+
+    #timer-label {
+        font-size: 3rem;
+    }
+
+    #question-text {
+        font-size: 1.3rem;
+    }
+
+    #choices-grid {
+        gap: 15px;
+        row-gap: 15px;
+    }
+
+    #choices-grid .choice-btn {
+        font-size: 1.2rem;
+        height: 70px;
+    }
+
+
+    /* Game Over Screen */
+
+    .gameover-container {
+        width: 70%;
+        height: auto;
+    }
+
+    .gameover-container h1 {
+        font-size: 3rem;
+        text-align: center;
+        padding: 0 0 1rem 0;
+    }
+
+    .gameover-container p {
+        font-size: 1.5rem;
+    }
+
+    .gameover-standings-container {
+        min-height: 300px;
+        max-height: 300px;
+    }
+
+    .score-row {
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+    }
+
+    .gameover-container a {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* Short-height window support */
+
+@media (max-height: 700px) {
+
+    .question-screen-container {
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    #question-text {
+        font-size: 1.2rem;
+    }
+
+    #choices-grid {
+        gap: 10px;
+    }
+
+    #choices-grid .choice-btn {
+        height: 65px;
+    }
+
+}

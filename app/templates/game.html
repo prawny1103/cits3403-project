@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/minecraft-logo.svg')}}">
 </head>
     <body>
         <main id="game-page" class="d-flex justify-content-center align-items-center">
@@ -21,9 +22,8 @@
                         <div class="players-container d-flex flex-column justify-content-center align-items-center mt-5">
                             <h3 class="players-label mt-4">Players Joined:</h3>
                             <ul id="player-list" class="mb-4">
-                                
-                            </ul>
                             
+                            </ul>
                         </div>
                         {% if is_host %}
                         <button id="start-game" class="mt-4" onclick="startGame()">Start Game</button>
@@ -51,15 +51,16 @@
                         <div class="timer-wrap">
                             <div id="timer-bar"></div>
                         </div>
-                        <p id="question-text">  </p>
+                        <p id="question-text"> hello world here </p>
                         <div class="choices-grid" id="choices-grid">
-                            <!-- for testing
-                           <button>test button</button>
-                           <button>test button</button>
-                           <button>test button</button>
-                           <button>test button</button> -->
+                            <!-- test start -->
+                           <!-- <button class="choice-btn">test button</button>
+                           <button class="choice-btn">test button</button>
+                           <button class="choice-btn">test button</button>
+                           <button class="choice-btn">test button</button> -->
+                           <!-- test end -->
                         </div>
-                        <div id="feedback-bar" class="mt-3"> </div>
+                        <div id="feedback-bar" class="mt-3"> Test Feedback !</div>
                     </div>
                 </div>
                 
@@ -70,39 +71,74 @@
                         <div id="scores-list" class="d-flex flex-column justify-content-start align-items-center mt-4 pt-3">
                             <!-- testing -->
                             <!-- <div class="score-row gold">
-                                <div>   
+                                <div class="score-num-name">   
                                     <span class="score-rank">1.</span>
                                     <span class="score-name">Darrell</span>
                                 </div>
                                 <span class="score-pts">7979</span>
                             </div>
                             <div class="score-row silver">
-                                <div>   
-                                    <span class="score-rank">1.</span>
-                                    <span class="score-name">Darrell</span>
+                                <div class="score-num-name">   
+                                    <span class="score-rank">2.</span>
+                                    <span class="score-name">Sam</span>
                                 </div>
-                                <span class="score-pts">7979</span>
+                                <span class="score-pts">33</span>
                             </div>
                             <div class="score-row bronze">
-                                <div>   
-                                    <span class="score-rank">1.</span>
-                                    <span class="score-name">Darrell</span>
+                                <div class="score-num-name">   
+                                    <span class="score-rank">3.</span>
+                                    <span class="score-name">Edward</span>
                                 </div>
-                                <span class="score-pts">7979</span>
+                                <span class="score-pts">777</span>
                             </div>
                             <div class="score-row">
-                                <div>   
-                                    <span class="score-rank">1.</span>
-                                    <span class="score-name">Darrell</span>
+                                <div class="score-num-name">   
+                                    <span class="score-rank">4.</span>
+                                    <span class="score-name">Kylee</span>
                                 </div>
-                                <span class="score-pts">7979</span>
+                                <span class="score-pts">333</span>
                             </div>
                             <div class="score-row">
-                                <div>   
-                                    <span class="score-rank">1.</span>
-                                    <span class="score-name">Darrell</span>
+                                <div class="score-num-name">   
+                                    <span class="score-rank">5.</span>
+                                    <span class="score-name">John</span>
                                 </div>
-                                <span class="score-pts">7979</span>
+                                <span class="score-pts">4</span>
+                            </div>
+                            <div class="score-row">
+                                <div class="score-num-name">   
+                                    <span class="score-rank">5.</span>
+                                    <span class="score-name">John</span>
+                                </div>
+                                <span class="score-pts">4</span>
+                            </div>
+                            <div class="score-row">
+                                <div class="score-num-name">   
+                                    <span class="score-rank">5.</span>
+                                    <span class="score-name">John</span>
+                                </div>
+                                <span class="score-pts">4</span>
+                            </div>
+                            <div class="score-row">
+                                <div class="score-num-name">   
+                                    <span class="score-rank">5.</span>
+                                    <span class="score-name">John</span>
+                                </div>
+                                <span class="score-pts">4</span>
+                            </div>
+                            <div class="score-row">
+                                <div class="score-num-name">   
+                                    <span class="score-rank">5.</span>
+                                    <span class="score-name">John</span>
+                                </div>
+                                <span class="score-pts">4</span>
+                            </div>
+                            <div class="score-row">
+                                <div class="score-num-name">   
+                                    <span class="score-rank">5.</span>
+                                    <span class="score-name">John</span>
+                                </div>
+                                <span class="score-pts">4</span>
                             </div> -->
                             <!-- testing end -->
                         </div>

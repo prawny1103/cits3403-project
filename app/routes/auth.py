@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, current_user
 from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
+import re 
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -12,13 +13,47 @@ def signup():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
+        # Username Validation
+        # if no username entered
+        if not username:
+            flash('Username is required')
+            return redirect(url_for('auth.signup'))
+
+        # cap username length
+        if len(username) < 3 or len(username) > 10:
+            flash('Username must be between 3 and 10 characters')
+            return redirect(url_for('auth.signup'))
+
+        # no odd symbol for username
+        if not re.match(r'^[A-Za-z0-9_]+$', username):
+            flash('Username can only contain letters, numbers, and underscores')
+            return redirect(url_for('auth.signup'))
+
+        # password validation
+        # check if password meets criteria first
+        if not password:
+            flash('Password is required')
+            return redirect(url_for('auth.signup'))
+
+        if len(password) < 5: 
+            flash('Password has to be at least 5 characters long')
+            return redirect(url_for('auth.signup'))
+        
+        if not re.search(r'[A-Z]', password):
+            flash('Password must contain at least one uppercase letter')
+            return redirect(url_for('auth.signup'))
+        
+        if not re.search(r'[0-9]', password):
+            flash('Password must contain at least one number')
+            return redirect(url_for('auth.signup'))
+
         if password != confirm_password:
             flash('Passwords do not match')
             return redirect(url_for('auth.signup'))
 
         if (User.query.filter_by(username=username).first()):
             flash('Username already exists')
-            return redirect(url_for('auth.signup'))
+            return redirect(url_for('auth.signup')) 
 
         new_user = User(
             username=username,

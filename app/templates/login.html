@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Log in</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/minecraft-logo.svg')}}">
 </head>
 <body>
     <main id="login-page" class="d-flex align-items-center justify-content-center">
@@ -28,18 +29,18 @@
                         <input type="password" id="login-password" class="form-control" name="password" required placeholder="Enter your password">
                     </div>
                     
-                    <a class="login-forgotPass" href="#">Forgot Password</a>
+                    <div class="login-message-area d-flex">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="login-flash" id="login-flash">
+                                    {{ messages[0] }}
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
 
                     <button id="login-button" class="btn" type="submit">Login</button>
                 </form>
-
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        <div class="alert alert-danger mt-3" role="alert">
-                            {{ messages[0] }}
-                        </div>
-                    {% endif %}
-                {% endwith %}
                 
                 <p class="login-bottom-text">
                     Don't have an account?
@@ -50,5 +51,15 @@
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        const flash = document.getElementById('login-flash')
+
+        if (flash) {
+            setTimeout(() => {
+                flash.classList.add('fade-out');
+
+            }, 5000);
+        }
+    </script>
 </body>
 </html>

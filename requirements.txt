@@ -8,3 +8,5 @@ python-dotenv
 email-validator
 requests
 pytest
+selenium
+webdriver-manager

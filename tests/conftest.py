@@ -1,9 +1,13 @@
+import threading
 import pytest
 from app import create_app
 from app.extensions import db
 from app.models.user import User
 from werkzeug.security import generate_password_hash
 from app import socketio
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture
 def app():
@@ -45,3 +49,22 @@ def auth_client(client, app):
 @pytest.fixture
 def socket_client(app, auth_client):
     return socketio.test_client(app, flask_test_client=auth_client)
+
+@pytest.fixture(scope='session')
+def driver():
+    # Setup Chrome in headless mode (no window pops up)
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless') 
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    yield driver
+    driver.quit()
+
+@pytest.fixture(scope='session')
+def live_server(app):
+    # This starts the Flask app in a separate thread so Selenium can hit it
+    from werkzeug.serving import make_server
+    server = make_server('127.0.0.1', 5000, app)
+    thread = threading.Thread(target=server.serve_forever)
+    thread.start()
+    yield "http://127.0.0.1:5000"
+    server.shutdown()

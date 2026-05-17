@@ -39,27 +39,17 @@ def handle_join(data):
 def handle_start(data):
     room_code = data.get('room_code')
     room = Room.query.filter_by(room_code=room_code).first()
-
-    if room.quiz_type == 'preset':
-        # Fetch all questions in the category, then randomly select the specified number
-        pool = Question.query.filter_by(
-            room_id=None,
-            category=room.preset_category
-        ).all()
-
-        if len(pool) < room.question_count: 
-            emit('error', {'message': 'Not enough questions in the selected category.'}, to=room_code)
-            return
+    
+    if room.quiz_id:
+        questions = Question.query.filter_by(quiz_id=room.quiz_id).all()
         
-        questions = random.sample(pool, room.question_count)
-
     else:
         questions = Question.query.filter_by(room_id=room.id).all()
 
-        if not questions:
-            emit('error', {'message': 'No questions available for this quiz.'}, to=room_code)
-            return
-        
+    if not questions:
+        emit('error', {'message': 'No questions available for this quiz.'}, to=room_code)
+        return
+    
     game_state[room_code] = {
         'questions': [q.id for q in questions],
         'time_limit': room.time_limit,
@@ -110,7 +100,7 @@ def send_next_question(room_code):
 
 # Auto advance if time runs out
 def auto_advance(room_code, question_index):
-    """Move to the next question if we're still on the same question"""
+    # Move to the next question if we're still on the same question
     with _app.app_context():
         state = game_state.get(room_code)
         if not state:

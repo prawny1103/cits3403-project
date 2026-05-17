@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Quizzes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main id="crtRoom-page"> <!-- Using crtRoom-page ID for consistent styling -->
+        <header class="crtRoom-header d-flex align-items-center justify-content-between">
+            <nav class="d-flex align-items-center justify-content-between">
+                <div class="crtRoom-nav-left-container d-flex justify-content-between align-items-center text-end ms-3">
+                    <a href="{{ url_for('main.join_room') }}">JOIN ROOM</a>
+                    <a href="{{ url_for('main.create_room') }}">CREATE ROOM</a>
+                    <a href="{{ url_for('quiz.my_quizzes') }}">MY QUIZZES</a>
+                </div>
+                
+                <a href="{{ url_for('main.home') }}" class="crtRoom-nav-right-container d-flex justify-content-center align-items-center">
+                    <h3 class="m-0"> {{ current_user.username }} </h3>
+                </a>
+            </nav>
+        </header>
+
+        <section class="container mt-5">
+            <div class="d-flex justify-content-between align-items-center mb-4 text-white">
+                <h2>My Quizzes</h2>
+                <a href="{{ url_for('quiz.create_quiz') }}" class="btn fw-bold" id="create-room-btn" style="width: auto;">Create New Quiz</a>
+            </div>
+            
+            <div class="card bg-dark text-white p-4 mb-5">
+                <h3>Your Creations</h3>
+                <div class="list-group list-group-flush mt-3">
+                    {% for quiz in user_quizzes %}
+                    <div class="list-group-item bg-dark text-white d-flex justify-content-between align-items-center border-secondary">
+                        <div>
+                            <h5 class="mb-1">{{ quiz.title }}</h5>
+                            <small class="text-secondary">{{ quiz.questions|length }} questions — {{ "Published" if quiz.is_published else "Draft" }}</small>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="{{ url_for('quiz.edit_quiz', quiz_id=quiz.id) }}" class="btn btn-sm btn-outline-info">Edit</a>
+                            {% if not quiz.is_published %}
+                            <form action="{{ url_for('quiz.publish_quiz', quiz_id=quiz.id) }}" method="POST">
+                                <button type="submit" class="btn btn-sm fw-bold" style="background-color: rgb(65, 208, 82); color: black;">Publish</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <p class="text-secondary mt-2">You haven't created any quizzes yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card bg-dark text-white p-4">
+                <h3>Public Quizzes</h3>
+                <div class="list-group list-group-flush mt-3">
+                    {% for quiz in public_quizzes %}
+                    <div class="list-group-item bg-dark text-white border-secondary">
+                        <h5 class="mb-1">{{ quiz.title }}</h5>
+                        <p class="mb-1 small text-secondary">{{ quiz.description }}</p>
+                    </div>
+                    {% else %}
+                    <p class="text-secondary mt-2">No public quizzes available.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

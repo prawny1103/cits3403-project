@@ -180,7 +180,7 @@
     height: 40%;
 }
 
-#create-room-btn, #join-room-btn {
+#create-room-btn, #join-room-btn, #create-quiz-btn {
     color: black;
     background-color: rgb(65, 208, 82);
     font-size: 1.6rem;
@@ -188,7 +188,7 @@
     transition: 0.2s;
 }
 
-#create-room-btn:hover, #join-room-btn:hover {
+#create-room-btn:hover, #join-room-btn:hover, #create-quiz-btn:hover {
     color: black;
 }
 

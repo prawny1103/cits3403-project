@@ -19,6 +19,7 @@
                 <h1>Welcome back</h1>
 
                 <form method="POST" action="{{ url_for('auth.login') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div class="login-form-group">
                         <label for="login-username">Username <span>*</span></label>
                         <input type="text" id="login-username" class="form-control" name="username" required placeholder="Enter your username">

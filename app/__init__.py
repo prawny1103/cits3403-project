@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_socketio import SocketIO
-from app.extensions import db, login_manager
+from app.extensions import db, login_manager, csrf
 from app.models import db, Question
 from config import Config
 import json
@@ -22,6 +22,7 @@ def create_app():
     # Connect the database and login manager to the app
     db.init_app(app)
     login_manager.init_app(app)
+    csrf.init_app(app)
 
     # Connect socketio (websockets) to the app
     socketio.init_app(app)

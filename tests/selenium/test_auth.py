@@ -4,29 +4,28 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # Testing the flow of events. When a user signs up with valid credentials, they should be redirected to the homepage. 
 def test_registration_to_home_flow(driver, live_server):
-    # 1. Navigate to the signup page
+    # Navigate to the signup page
     driver.get(f"{live_server}/register")
     
-    # 2. Find the form elements using IDs from signup.html
+    # Find the form elements using IDs from signup.html
     username_input = driver.find_element(By.ID, "signup-username")
     password_input = driver.find_element(By.ID, "signup-password")
     confirm_input = driver.find_element(By.ID, "signup-password-confirm")
     submit_button = driver.find_element(By.ID, "signup-button")
     
-    # 3. Fill out the form
+    # Fill out the form
     test_username = "AgileUser1"
     username_input.send_keys(test_username)
     password_input.send_keys("Password123")
     confirm_input.send_keys("Password123")
     
-    # 4. Submit the form
+    # Submit the form
     submit_button.click()
     
-    # 5. Wait for redirection and verify the username appears in the header
-    # Using WebDriverWait to handle network/rendering latency
+    # Wait for redirection and verify the username appears in the header
     wait = WebDriverWait(driver, 10)
     
-    # Verify we are on the home page (landing-page-main)
+    # Verify we are on the home page
     wait.until(EC.presence_of_element_located((By.ID, "landing-page-main")))
     
     # Check if the username is displayed in the nav bar as per index.html

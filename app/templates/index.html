@@ -43,7 +43,8 @@
                             <h1 class="welcome-text-body">Welcome to</h1>
                             <h1 class="game-name-body fw-bold">AGILE QUIZ</h1>
                         </div>
-                        <div class="landing-inner3-container-right d-flex flex-column justify-content-around align-items-end">
+                        <div class="landing-inner3-container-right d-flex flex-column justify-content-around align-items-end gap-3">
+                            <button id="create-quiz-btn" type="button" class="btn">Create Quiz</button>
                             <button id="create-room-btn" type="button" class="btn">Create Room</button>
                             <button id="join-room-btn" type="button" class="btn">Join Room</button>
                         </div>
@@ -64,9 +65,10 @@
                 var isLoggedIn = {{ current_user.is_authenticated|tojson }};
                 var createRoomBtn = document.getElementById('create-room-btn');
                 var joinRoomBtn = document.getElementById('join-room-btn');
+                var createQuizBtn = document.getElementById('create-quiz-btn');
                 var loginAlert = document.getElementById('login-alert');
 
-                if (!isLoggedIn && createRoomBtn && joinRoomBtn && loginAlert) {
+                if (!isLoggedIn && createRoomBtn && joinRoomBtn && createQuizBtn && loginAlert) {
                     createRoomBtn.addEventListener('click', function (e) {
                         e.preventDefault();
                         loginAlert.innerText = 'Please log in to create a room.';
@@ -75,6 +77,11 @@
                     joinRoomBtn.addEventListener('click', function (e) {
                         e.preventDefault();
                         loginAlert.innerText = 'Please log in to join a room.';
+                        loginAlert.classList.add('visible');
+                    });
+                    createQuizBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        loginAlert.innerText = 'Please log in to create a quiz.';
                         loginAlert.classList.add('visible');
                     });
                 } else if (isLoggedIn) {
@@ -88,6 +95,12 @@
                         joinRoomBtn.addEventListener('click', function () {
                             window.location.href = "{{ url_for('main.join_room') }}";
                             return;
+                        });
+                    }
+                    if (createQuizBtn) {
+                        createQuizBtn.addEventListener('click', function () {
+                            window.location.href = "{{ url_for('quiz.my_quizzes') }}"
+                            return
                         });
                     }
                 }

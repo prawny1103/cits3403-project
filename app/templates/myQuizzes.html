@@ -45,6 +45,7 @@
                             <a href="{{ url_for('quiz.edit_quiz', quiz_id=quiz.id) }}" class="btn btn-sm btn-outline-info">Edit</a>
                             {% if not quiz.is_published %}
                             <form action="{{ url_for('quiz.publish_quiz', quiz_id=quiz.id) }}" method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <button type="submit" class="btn btn-sm fw-bold" style="background-color: rgb(65, 208, 82); color: black;">Publish</button>
                             </form>
                             {% endif %}

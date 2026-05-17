@@ -38,6 +38,7 @@
                     <p>Enter the 4-digit room code to join a quiz </p>
 
                     <form action="{{ url_for('quiz.join_game') }}" class="joinRoom-form d-flex flex-column justify-content-center align-items-center mt-3" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                         <label class="mt-3" for="room-code">ROOM CODE</label>
                         <input type="text" class="form-control fw-bold mt-2" name="room_code" id="room-code" placeholder="0000" maxlength="4" inputmode="numeric">
                         <button type="submit" class="btn mt-3 mb-5"> JOIN ROOM</button>

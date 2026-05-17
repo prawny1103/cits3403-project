@@ -3,6 +3,7 @@ from app import create_app
 from app.extensions import db
 from app.models.user import User
 from werkzeug.security import generate_password_hash
+from app import socketio
 
 @pytest.fixture
 def app():
@@ -40,3 +41,7 @@ def auth_client(client, app):
             sess['_fresh'] = True
             
     return client
+
+@pytest.fixture
+def socket_client(app, auth_client):
+    return socketio.test_client(app, flask_test_client=auth_client)

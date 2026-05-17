@@ -46,18 +46,17 @@
                             
                             <div class="crtRoom-preset-container">
                                 <input class="form-check-input" type="radio" name="quizType" id="presetQuiz" value="preset">
-                                <label class="form-check-label" for="presetQuiz">PRESET</label>
+                                <label class="form-check-label" for="presetQuiz">CUSTOM</label>
                             </div>
                         </div>
                             
                         <div id="preset-options" class="mt-4 d-none">
                             <div class="preset-setting">
-                                <label class="form-label fw-bold">Choose preset quiz</label>
-                                <select id="preset-select" name="preset-select" class="form-select">
-                                    <option value="general">General knowledge</option>
-                                    <option value="science">Science and nature</option>
-                                    <option value="history">History</option>
-                                    <option value="sports">Sports</option>
+                                <label class="form-label fw-bold">Choose custom quiz</label>
+                                <select id="preset-select" name="preset-quiz-id" class="form-select">
+                                    {% for quiz in published_quizzes %}
+                                        <option value="{{ quiz.id }}">{{ quiz.title }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>

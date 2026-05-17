@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import pytest
 
 # When the room creation form is filled, a room should be created, and the user redirected to the game lobby
 def test_create_room_flow(driver, live_server, app):

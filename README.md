@@ -12,3 +12,4 @@ All tests are managed by `pytest`.
 *   **Run only Unit Tests:** `python -m pytest tests/unit`
 *   **Run only Selenium Tests:** `python -m pytest tests/selenium` 
     *(Note: These require a live server instance and the appropriate WebDriver installed)*.
+*   **Run specific test:** `python -m pytest tests/unit/<filename>`

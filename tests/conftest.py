@@ -63,9 +63,16 @@ def driver():
 @pytest.fixture(scope='session')
 def live_server(app):
     # This starts the Flask app in a separate thread so Selenium can hit it
+    with app.app_context():
+        if not User.query.filter_by(username='tester').first():
+            user = User(username='tester', password_hash=generate_password_hash('Password123'))
+            db.session.add(user)
+            db.session.commit()
+
     from werkzeug.serving import make_server
     server = make_server('127.0.0.1', 5000, app)
     thread = threading.Thread(target=server.serve_forever)
     thread.start()
+    
     yield "http://127.0.0.1:5000"
     server.shutdown()

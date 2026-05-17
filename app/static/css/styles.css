@@ -1897,3 +1897,28 @@
     }
 
 }
+
+/* Create room fixes for short desktop windows */
+@media (max-height: 800px) and (min-width: 900px) {
+    #crtRoom-page {
+        min-height: 100vh;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    #crtRoom-body {
+        height: auto;
+        min-height: calc(100vh - 4rem);
+        padding: 1rem 0 2rem;
+        align-items: flex-start;
+    }
+
+    .crtRoom-container {
+        transform: scale(0.9);
+        transform-origin: top center;
+    }
+
+    #host-room-btn {
+        margin-top: 0.8rem;
+    }
+}

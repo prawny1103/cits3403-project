@@ -6,7 +6,7 @@ from app.extensions import db
 
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    room_code = db.Column(db.String(4), unique=True, nullable=False)
+    room_code = db.Column(db.String(4), nullable=False) # room code is not unique, can be reused when room ends
     is_active = db.Column(db.Boolean, default=True)
     host_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     question_count = db.Column(db.Integer, default=10)
@@ -18,12 +18,12 @@ class Room(db.Model):
 
     @staticmethod
     def generate_code():
-        active_count = Room.query.count()
+        active_count = Room.query.filter_by(is_active=True).count()
         if active_count >= 10000:
             return None # Server is full, all codes are in use
         while True:
             code = f"{random.randint(0, 9999):04d}"
-            if not Room.query.filter_by(room_code=code).first():
+            if not Room.query.filter_by(room_code=code, is_active=True).first():
                 return code
 
 

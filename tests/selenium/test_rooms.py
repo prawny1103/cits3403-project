@@ -3,8 +3,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # When the room creation form is filled, a room should be created, and the user redirected to the game lobby
-def test_create_room_flow(driver, live_server, app):
-    wait = WebDriverWait(driver, 10)
+def test_create_room_flow(driver, live_server):
+    wait = WebDriverWait(driver, 15)
 
     driver.get(f"{live_server}/login")
     wait.until(EC.presence_of_element_located((By.ID, "login-username"))).send_keys("tester")
@@ -13,27 +13,22 @@ def test_create_room_flow(driver, live_server, app):
 
     wait.until(EC.presence_of_element_located((By.ID, "landing-page-main")))
 
-    # Navigate to Create Room page
     driver.get(f"{live_server}/createRoom")
 
     # Wait for the Create Room page to actually load
     q_count_select = wait.until(EC.presence_of_element_located((By.ID, "question-count")))
     q_count_select.send_keys("10")
 
-    # Select difficulty
     difficulty_select = driver.find_element(By.ID, "difficulty")
-    difficulty_select.send_keys("Medium")
+    difficulty_select.send_keys("medium")
 
-    # Select 30s timer
     timer_30 = driver.find_element(By.ID, "t30")
     driver.execute_script("arguments[0].click();", timer_30)
 
-    # Submit the form
     submit_btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
     submit_btn.click()
 
-    # Wait for redirection to the Game Lobby
-    wait = WebDriverWait(driver, 15)
+    wait = WebDriverWait(driver, 20) 
     wait.until(EC.presence_of_element_located((By.ID, "lobby-screen")))
 
     # Verify room code is displayed

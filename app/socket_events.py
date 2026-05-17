@@ -19,6 +19,7 @@ def init_app(app):
 
 # Dictionary to track active players in each room
 active_players = {}
+# Game state keeps track of game variables
 game_state = {}
 
 # When user joins a room
@@ -42,10 +43,13 @@ def handle_start(data):
     room_code = data.get('room_code')
     room = Room.query.filter_by(room_code=room_code).first()
     
+    # If the room has an associated quiz id:
     if room.quiz_id:
+        # Get the questions for that associated quiz
         questions = Question.query.filter_by(quiz_id=room.quiz_id).all()
         
     else:
+        # Otherwise fetch the questions from the database that were fetched from the opentdb api
         questions = Question.query.filter_by(room_id=room.id).all()
 
     if not questions:
@@ -54,33 +58,33 @@ def handle_start(data):
     
     game_state[room_code] = {
         'questions': [q.id for q in questions],
-        'time_limit': room.time_limit,
-        'current': 0,
+        'time_limit': room.time_limit, # Time limit to answer each question
+        'current': 0, # What question are we currently on?
         'scores': {player: 0 for player in active_players.get(room_code, [])}, # initialize scores for all players in the room
-        'answered': {},
+        'answered': {}, # Who has answered the question? Should auto-advance if all players have answered
         'question_start_time': 0,
-        'advance_timer': None,
+        'advance_timer': None, # Timer to keep track of when to advance to the next question
     }
 
     # Notify clients in the room that the game is starting (redirect to quiz page)
     emit('game_starting', to=room_code)
 
-    # small delay for animation
-
 
 def send_next_question(room_code):
+    """Send the next question to the specified room code. Ends the game if no questions remain"""
     with _app.app_context():
-        state = game_state.get(room_code)
+        state = game_state.get(room_code) # Get the game state
         if not state:
             return
         
-        if (state['current'] < len(state['questions'])):
+        if (state['current'] < len(state['questions'])): # If their are questions that haven't been answered yet
             q_id = state['questions'][state['current']]
             question = db.session.get(Question, q_id)
             
             state['question_start_time'] = time.time()
             state['answered'] = {} # reset answered status for new question
             
+            # Send the next question to the client
             socketio.emit('next_question', {
                 'id': question.id,
                 'text': question.text,
@@ -99,8 +103,9 @@ def send_next_question(room_code):
         else:
             room = Room.query.filter_by(room_code=room_code, is_active=True).first()
             if room:
-                room.is_active=False
+                room.is_active=False # Game is over, room is not active
 
+            # Store the game in the game table
             game = Game(
                 room_id = room.id,
                 ended_at = datetime.utcnow()
@@ -108,6 +113,7 @@ def send_next_question(room_code):
             db.session.add(game)
             db.session.flush()
 
+            # Store scores in player stats table
             for username, score in state['scores'].items():
                 user=User.query.filter_by(username=username).first()
                 if user:
@@ -115,7 +121,7 @@ def send_next_question(room_code):
                         game_id=game.id,
                         user_id=user.id,
                         score=score,
-                        correct_answers=None
+                        correct_answers=None # Not used
                     ))
             
             # Delete questions that were received from the api and are tied to this room code
@@ -123,6 +129,7 @@ def send_next_question(room_code):
 
             db.session.commit()
 
+            # Tell the client that there are no more questions, game is over
             socketio.emit('game_over', {'final_scores': state['scores']}, to=room_code)
             game_state.pop(room_code, None)
 
@@ -145,6 +152,7 @@ def auto_advance(room_code, question_index):
         t.start()
         state['advance_timer'] = t
 
+# Server receives answer from a client
 @socketio.on('submit_answer')
 def handle_response(data):
     room_code = data.get('room_code')
@@ -154,16 +162,19 @@ def handle_response(data):
     state = game_state.get(room_code)
     if not state:
         return
-    # Prevent double answering
+    # Prevent double answering, ignore if player has already answered
     if current_user.username in state['answered']:
         return
     state['answered'][current_user.username] = True
 
+    # Get question from the database
     question = db.session.get(Question, q_id)
+    # Does the user's choice match the correct answer?
     is_correct = (choice == question.correct_answer)
     points = 0
 
     if is_correct:
+        # If user is correct, calculate points based on the timme taken to answer
         time_taken = time.time() - state['question_start_time']
         multiplier = max(0, 1-(time_taken / state['time_limit'])) # Faster answers get more points
         points = int(1000 * multiplier)
@@ -199,12 +210,13 @@ def handle_response(data):
         t.daemon = True
         t.start()
 
-
+# Client requests the next question
 @socketio.on('request_question')
 def handle_request_question(data):
     room_code = data.get('room_code')
     send_next_question(room_code)
 
+# Built-in event for socketio - remove player from room on disconnect
 @socketio.on('disconnect')
 def handle_disconnect():
     for room_code, players in active_players.items():

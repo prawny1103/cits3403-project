@@ -1988,3 +1988,26 @@
         padding: 0.5rem;
     }
 }
+
+/* Fix landing page button scaling */
+#landing-page-main #create-quiz-btn,
+#landing-page-main #create-room-btn,
+#landing-page-main #join-room-btn {
+    width: clamp(220px, 30vw, 520px) !important;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: clamp(0.9rem, 1.4vw, 1.5rem);
+    padding: 0.6rem 1rem;
+    text-align: center;
+}
+
+/* Mobile landing buttons */
+@media (max-width: 768px) {
+    #landing-page-main #create-quiz-btn,
+    #landing-page-main #create-room-btn,
+    #landing-page-main #join-room-btn {
+        width: 90% !important;
+        font-size: 1rem;
+        padding: 0.7rem 1rem;
+    }
+}

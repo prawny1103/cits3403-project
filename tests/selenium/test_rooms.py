@@ -55,3 +55,12 @@ def test_create_room_requires_login(driver, live_server):
     
     # Check if we were redirected to login
     assert "/login" in driver.current_url
+
+# Verify room code input limit
+def test_room_code_input_limit(driver, live_server):
+    driver.get(f"{live_server}/joinRoom")
+    
+    room_input = driver.find_element(By.ID, "room-code")
+    room_input.send_keys("123456")
+    
+    assert room_input.get_attribute("value") == "1234"

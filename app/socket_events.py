@@ -4,10 +4,12 @@ import threading
 from app import socketio
 from app.extensions import db
 from app.models.quiz import Room, Question, Game, PlayerStats
+from app.models.user import User
 from flask_socketio import join_room, emit
 from flask_login import current_user
 from flask import current_app
 import random
+from datetime import datetime
 
 _app = None
 
@@ -95,6 +97,32 @@ def send_next_question(room_code):
             state['advance_timer'] = t
 
         else:
+            room = Room.query.filter_by(room_code=room_code, is_active=True).first()
+            if room:
+                room.is_active=False
+
+            game = Game(
+                room_id = room.id,
+                ended_at = datetime.utcnow()
+            )
+            db.session.add(game)
+            db.session.flush()
+
+            for username, score in state['scores'].items():
+                user=User.query.filter_by(username=username).first()
+                if user:
+                    db.session.add(PlayerStats(
+                        game_id=game.id,
+                        user_id=user.id,
+                        score=score,
+                        correct_answers=None
+                    ))
+            
+            # Delete questions that were received from the api and are tied to this room code
+            Question.query.filter_by(room_id=room.id).delete()
+
+            db.session.commit()
+
             socketio.emit('game_over', {'final_scores': state['scores']}, to=room_code)
             game_state.pop(room_code, None)
 

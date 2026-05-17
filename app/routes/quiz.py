@@ -124,7 +124,7 @@ def create_game():
 def join_game():
     code = request.form.get('room_code')
 
-    room = Room.query.filter_by(room_code=code).first()
+    room = Room.query.filter_by(room_code=code, is_active=True).first()
     if not room:   
         flash("Room not found. Please check the code and try again.")
         return redirect(url_for('main.home'))
@@ -134,7 +134,7 @@ def join_game():
 @quiz_bp.route('/game/<room_code>')
 @login_required
 def game_room(room_code):
-    room = Room.query.filter_by(room_code=room_code).first()
+    room = Room.query.filter_by(room_code=room_code, is_active=True).first()
     if not room:
         flash("Room not found.")
         return redirect(url_for('main.index'))

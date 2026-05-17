@@ -6,8 +6,10 @@ from app.models import db, Question
 from config import Config
 import json
 
+# Initialize websocket
 socketio = SocketIO(cors_allowed_origins="*")
 
+# The Flask factory function
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -17,10 +19,12 @@ def create_app():
     except OSError:
         pass
 
+    # Connect the database and login manager to the app
     db.init_app(app)
     login_manager.init_app(app)
     csrf.init_app(app)
 
+    # Connect socketio (websockets) to the app
     socketio.init_app(app)
 
     with app.app_context():

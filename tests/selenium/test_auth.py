@@ -50,3 +50,11 @@ def test_registration_failure_password_mismatch(driver, live_server):
     flash_message = wait.until(EC.presence_of_element_located((By.ID, "signup-flash")))
     
     assert "Passwords do not match" in flash_message.text
+
+# Ensure logged out users aren't allowed to view protected pages
+def test_unauthorized_redirect(driver, live_server):
+    driver.delete_all_cookies()
+    driver.get(f"{live_server}/createRoom")
+    
+    assert "/login" in driver.current_url
+    assert "Please enter your details" in driver.page_source

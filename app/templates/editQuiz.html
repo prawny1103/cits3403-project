@@ -31,6 +31,7 @@
                 <hr class="border-secondary">
 
                 <form method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     {% if not quiz %}
                         <!-- Step 1: Create Quiz Meta -->
                         <div class="mb-3">

@@ -4,10 +4,13 @@ from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 import re 
 
+# Flask blueprints regarding authentication, e.g. logging in, signing in, logging out
+
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def signup():
+    # Receive the form from the client
     if (request.method == 'POST'):
         username = request.form.get('username')
         password = request.form.get('password')
@@ -56,30 +59,35 @@ def signup():
             return redirect(url_for('auth.signup')) 
 
         new_user = User(
-            username=username,
-            password_hash=generate_password_hash(password)
+            username=username, # Username stored as plaintext
+            password_hash=generate_password_hash(password) # Generate salted hashed password
         )
 
         from app.extensions import db
         db.session.add(new_user)
         db.session.commit()
 
+        # Automatically login after signup is successful
         login_user(new_user)
         return redirect(url_for('main.home'))
 
     return render_template('signup.html')
 
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    # Temporary fix, ideally the login button will not be visible once signed in
+    # If the user is logged in
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     
+    # Get the form from the client
     if (request.method == 'POST'):
         username = request.form.get('username')
         password = request.form.get('password')
-        
+
+        # Database lookup for username
         user = User.query.filter_by(username=username).first()
+        # Check if password is correct
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
             return redirect(url_for('main.home'))

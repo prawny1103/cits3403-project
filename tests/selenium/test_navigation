@@ -1,0 +1,14 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Verify navbar links redirect correctly
+def test_navbar_navigation(driver, live_server):
+    driver.get(live_server)
+    wait = WebDriverWait(driver, 5)
+
+    register_link = driver.find_element(By.LINK_TEXT, "REGISTER")
+    register_link.click()
+
+    assert "/register" in driver.current_url
+    assert wait.until(EC.presence_of_element_located((By.ID, "signup-page")))

@@ -7,3 +7,4 @@ Werkzeug
 python-dotenv
 email-validator
 requests
+pytest

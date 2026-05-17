@@ -126,8 +126,7 @@ def join_game():
 
     room = Room.query.filter_by(room_code=code, is_active=True).first()
     if not room:   
-        flash("Room not found. Please check the code and try again.")
-        return redirect(url_for('main.home'))
+        return render_template('joinRoom.html', error="Room not found. Please check the code and try again.")
     else:
         return redirect(url_for('quiz.game_room', room_code=code))
 
